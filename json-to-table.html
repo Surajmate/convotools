@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON to Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    textarea {
+      width: 100%;
+      max-width: 600px;
+      height: 150px;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    .table-container {
+      max-width: 100%;
+      overflow-x: auto;
+      margin-top: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px; /* Ensures the table remains scrollable on smaller screens */
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+      position: sticky;
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Convert JSON to Table</h1>
+  <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
+  <br>
+  <button onclick="convertJSONtoTable()">Convert to Table</button>
+  <div class="table-container" id="tableContainer"></div>
+
+  <script>
+    function convertJSONtoTable() {
+      const input = document.getElementById('jsonInput').value;
+
+      try {
+        const jsonData = JSON.parse(input); // Parse JSON input
+        if (!Array.isArray(jsonData)) {
+          alert("Please provide a JSON array.");
+          return;
+        }
+
+        const tableContainer = document.getElementById('tableContainer');
+        tableContainer.innerHTML = ""; // Clear previous table if any
+
+        const table = document.createElement('table');
+        const thead = document.createElement('thead');
+        const tbody = document.createElement('tbody');
+
+        // Extract headers from the first object
+        const headers = Object.keys(jsonData[0]);
+        const headerRow = document.createElement('tr');
+        headers.forEach(header => {
+          const th = document.createElement('th');
+          th.textContent = header;
+          headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+
+        // Fill table body with data
+        jsonData.forEach(item => {
+          const row = document.createElement('tr');
+          headers.forEach(header => {
+            const td = document.createElement('td');
+            td.textContent = item.hasOwnProperty(header) ? item[header] : '0'; // Ensure zero is displayed
+            row.appendChild(td);
+          });
+          tbody.appendChild(row);
+        });
+
+        table.appendChild(thead);
+        table.appendChild(tbody);
+        tableContainer.appendChild(table);
+
+      } catch (error) {
+        alert("Invalid JSON format. Please check your input.");
+      }
+    }
+  </script>
+</body>
+</html>
