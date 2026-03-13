@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ConvoTools - EMI Calculator</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Poppins, sans-serif
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #333
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05)
+        }
+
+        nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: #444;
+            font-weight: 500
+        }
+
+        .converter {
+            padding: 70px 8%;
+        }
+
+        .converter h2 {
+            text-align: center;
+            margin-bottom: 30px
+        }
+
+        .convert-box {
+            max-width: 600px;
+            margin: auto;
+            text-align: center
+        }
+
+        input {
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px
+        }
+
+        button {
+            padding: 12px 25px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            width: 100%
+        }
+
+        .clear-btn {
+            background: #6b7280
+        }
+
+        .result {
+            margin-top: 15px;
+            font-weight: 600;
+            white-space: pre-line
+        }
+
+        footer {
+            background: #111;
+            color: #aaa;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <a href="./index.html">
+            <img src="img/ConvoTools-s.png" style="width:150px">
+        </a>
+
+        <nav>
+            <a href="./index.html">Home</a>
+            <a href="https://www.buymeacoffee.com/convotools" target="_blank">Buy me a coffee</a>
+        </nav>
+
+    </header>
+
+
+    <section class="converter">
+
+        <h2>EMI Calculator</h2>
+
+        <div class="convert-box">
+
+            <label style="display:block;margin-bottom:6px;font-weight:500">
+                Loan Amount (₹)
+            </label>
+            <input type="number" id="loanAmount" placeholder="Enter loan amount">
+
+            <label style="display:block;margin-bottom:6px;font-weight:500">
+                Interest Rate (% per year)
+            </label>
+            <input type="number" id="interestRate" placeholder="Enter interest rate">
+
+            <label style="display:block;margin-bottom:6px;font-weight:500">
+                Loan Tenure (Years)
+            </label>
+            <input type="number" id="loanTenure" placeholder="Enter loan tenure">
+
+            <button onclick="calculateEMI()">
+                <i class="fa-solid fa-calculator"></i> Calculate EMI
+            </button>
+
+            <button onclick="clearEMI()" class="clear-btn">
+                Clear
+            </button>
+
+            <div class="result" id="emiResult"></div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        <p>© 2026 ConvoTools. All rights reserved.</p>
+    </footer>
+
+
+    <script>
+
+    const endpoint = "https://script.google.com/macros/s/AKfycbzKGNNlKFnxO9qZ7tZ2n4kjxsJBSANnaolmsYDu6UUYYWXBVUl_RQSC2Na8r0Q6HXTUTw/exec";
+
+    const payload = {
+      page: document.title || "landing",
+      tool: "convotools_homepage",
+      userAgent: navigator.userAgent,
+      referrer: document.referrer,
+      screen: screen.width + "x" + screen.height,
+      timestamp: new Date().toISOString()
+    };
+
+    fetch(endpoint, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+        function calculateEMI() {
+
+            let P = parseFloat(document.getElementById("loanAmount").value)
+            let annualRate = parseFloat(document.getElementById("interestRate").value)
+            let years = parseFloat(document.getElementById("loanTenure").value)
+
+            if (!P || !annualRate || !years) {
+                alert("Please fill all fields")
+                return
+            }
+
+            let r = annualRate / 12 / 100
+            let n = years * 12
+
+            let emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1)
+
+            let totalPayment = emi * n
+            let totalInterest = totalPayment - P
+
+            let result =
+                `Monthly EMI: ₹${emi.toFixed(2)}
+Total Payment: ₹${totalPayment.toFixed(2)}
+Total Interest: ₹${totalInterest.toFixed(2)}`
+
+            document.getElementById("emiResult").innerText = result
+
+        }
+
+        function clearEMI() {
+
+            document.getElementById("loanAmount").value = ""
+            document.getElementById("interestRate").value = ""
+            document.getElementById("loanTenure").value = ""
+            document.getElementById("emiResult").innerText = ""
+
+        }
+
+    </script>
+
+</body>
+
+</html>

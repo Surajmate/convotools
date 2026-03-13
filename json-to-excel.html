@@ -4,133 +4,265 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JSON to EXCEL | Convo</title>
-  <link rel="icon" type="image/x-icon" href="img/ConvoTools-f.png">
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <title>ConvoTools - JSON to Excel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Poppins, sans-serif
+    }
+
+    body {
+      background: #f5f7fb;
+      color: #333
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 8%;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05)
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: #2563eb
+    }
+
+    nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      color: #444;
+      font-weight: 500
+    }
+
+    .hero {
+      padding: 80px 8%;
+      text-align: center
+    }
+
+    .hero h1 {
+      font-size: 46px;
+      margin-bottom: 15px
+    }
+
+    .hero p {
+      color: #666;
+      margin-bottom: 30px
+    }
+
+    .hero button {
+      padding: 14px 30px;
+      border: none;
+      background: #2563eb;
+      color: white;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer
+    }
+
+    .tools {
+      padding: 60px 8%
+    }
+
+    .tools h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 32px
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: 0.3s
+    }
+
+    .card i {
+      font-size: 28px;
+      color: #2563eb;
+      margin-bottom: 15px
+    }
+
+    .card:hover {
+      transform: translateY(-5px)
+    }
+
+    .converter {
+      padding: 70px 8%;
+      /* background: white */
+    }
+
+    .converter h2 {
+      text-align: center;
+      margin-bottom: 30px
+    }
+
+    .convert-box {
+      max-width: 500px;
+      margin: auto;
+      text-align: center
+    }
+
+    .convert-box input,
+    select {
+      padding: 12px;
+      width: 100%;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px
+    }
+
+    .convert-box button {
+      padding: 12px 25px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer
+    }
+
+    .result {
+      margin-top: 15px;
+      font-weight: 600
+    }
+
+    .features {
+      padding: 70px 8%
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px
+    }
+
+    .feature {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05)
+    }
+
+    .feature i {
+      font-size: 30px;
+      color: #2563eb;
+      margin-bottom: 10px
+    }
+
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 30px;
+      margin-top: 60px
+    }
+  </style>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="./index.html">
-        <img src="img/ConvoTools-s.png" alt="ConvoTools" style="width: 150px;" srcset=""></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" target="_blank" href="https://www.buymeacoffee.com/convotools">Buy me a coffee</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Tools
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="./json-to-excel.html">JSON to Excel</a></li>
-              <li><a class="dropdown-item" href="./excel-to-json.html">Excel to JSON</a></li>
-              <li><a class="dropdown-item" href="./json-stringify.html">JSON Stringify</a></li>
-              <li><a class="dropdown-item" href="./json-unstringify.html">JSON Unstringify</a></li>
-              <li><a class="dropdown-item" href="./text-to-one-line.html">Convert to One Line</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">More tools ...</a></li>
-            </ul>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-  <div class="row m-2">
-    <div class="col-4 p-2">
-      <!-- <div class="card">
-        <div class="card-header">
-          <h5 class="text-center mt-2">
-            Conversion Tools
-          </h5>
-        </div>
-        <ul class="list-group">
-          <li class="list-group-item">JSON to Excel</li>
-        </ul>
-      </div> -->
-    </div>
-    <div class="col-lg-4 col-sm-12 col-xs-12 col-md-10 p-2">
-      <div class="card">
-        <img src="./img/Slide4.PNG" class="card-img-top" alt="JSON to Excel">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <label for="jsonFileInput"><strong>Select JSON File:</strong></label><br>
-            <input type="file" id="jsonFileInput" accept=".json" class="form-control mb-2" />
-            <label for="excelFileName"><strong>Enter Excel File Name:</strong></label>
-            <input type="text" id="excelFileName" class="form-control" placeholder="Enter File Name" />
-          </li>
-          <li class="list-group-item">
-            <button class="btn btn-success w-100" onclick="handleFile()">Convert to Excel</button>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="col-4 p-2">
-      <!-- <div class="p-2" style="border-radius: 5px; background-color: rgba(128, 128, 128, 0.142);">
-        <h5 class="text-center">Your Suggestions</h5>
-        <form id="contact_form" name="contact_form" method="post">
-          <label>Name</label>
-          <input type="text" required maxlength="50" class="form-control mb-2" id="first_name" name="first_name" placeholder="Enter your Name">
-          <label for="email_addr">Email</label>
-          <input type="email" required maxlength="50" class="form-control mb-2" id="email_addr" name="email" placeholder="ex: name@example.com">
-          <label for="message">Message</label>
-          <textarea class="form-control mb-2" id="message" name="message" rows="5" placeholder="Enter your message here....."></textarea>
-          <button type="submit" class="btn btn-primary px-4 btn-lg">Submit</button>
-        </form>
-      </div> -->
-    </div>
-  </div>
 
-  <script type="text/javascript">
+  <header>
+    <!-- <div class="logo">ConvoTools</div> -->
+    <a class="logo" href="./index.html">
+      <img src="img/ConvoTools-s.png" alt="ConvoTools" style="width: 150px;">
+    </a>
+    <nav>
+      <a href="./index.html">Home</a>
+      <a href="https://www.buymeacoffee.com/convotools" target="_blank">Buy me a coffee</a>
+    </nav>
+  </header>
+
+  <section class="converter" id="converter">
+    <h2>JSON File to Excel Converter</h2>
+    <div class="convert-box" style="max-width:600px;">
+
+      <label style="display:block;margin-bottom:6px;font-weight:500;">Select JSON File</label>
+      <input type="file" id="jsonFileInput" style="background: white" accept=".json" />
+
+      <label style="display:block;margin-top:10px;margin-bottom:6px;font-weight:500">Excel File Name</label>
+      <input type="text" id="excelFileName" placeholder="Enter File Name" />
+
+      <button onclick="handleFile()" style="width:100%">Convert to Excel</button>
+
+      <div class="result" id="result"></div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 ConvoTools. All rights reserved.</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+  <script>
+
+    const endpoint = "https://script.google.com/macros/s/AKfycbzKGNNlKFnxO9qZ7tZ2n4kjxsJBSANnaolmsYDu6UUYYWXBVUl_RQSC2Na8r0Q6HXTUTw/exec";
+
+    const payload = {
+      page: document.title || "landing",
+      tool: "convotools_homepage",
+      userAgent: navigator.userAgent,
+      referrer: document.referrer,
+      screen: screen.width + "x" + screen.height,
+      timestamp: new Date().toISOString()
+    };
+
+    fetch(endpoint, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
     function convertJSONtoExcel(jsonData, fileName) {
-      var ws = XLSX.utils.json_to_sheet(jsonData);
-      var wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-      XLSX.writeFile(wb, fileName + '.xlsx');
+      var ws = XLSX.utils.json_to_sheet(jsonData)
+      var wb = XLSX.utils.book_new()
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1')
+      XLSX.writeFile(wb, fileName + '.xlsx')
     }
 
     function handleFile() {
-      var input = document.getElementById('jsonFileInput');
-      var file = input.files[0];
-      var excelFileName = document.getElementById('excelFileName').value || 'output';
+      var input = document.getElementById('jsonFileInput')
+      var file = input.files[0]
+      var excelFileName = document.getElementById('excelFileName').value || 'output'
 
       if (file) {
-        var reader = new FileReader();
+        var reader = new FileReader()
 
         reader.onload = function (e) {
           try {
-            var jsonData = JSON.parse(e.target.result);
-            convertJSONtoExcel(jsonData, excelFileName);
+            var jsonData = JSON.parse(e.target.result)
+            convertJSONtoExcel(jsonData, excelFileName)
+            document.getElementById('result').innerText = 'Excel file downloaded successfully.'
           } catch (error) {
-            console.error('Error parsing JSON file:', error);
-            alert('Error parsing JSON file. Please check the file format.');
+            console.error('Error parsing JSON file:', error)
+            alert('Error parsing JSON file. Please check the file format.')
           }
-        };
+        }
 
-        reader.readAsText(file);
+        reader.readAsText(file)
       } else {
-        alert('Please select a JSON file.');
+        alert('Please select a JSON file.')
       }
     }
-  </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
+  </script>
 
 </body>
 

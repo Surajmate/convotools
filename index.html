@@ -1,175 +1,445 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ConvoTools</title>
-  <link rel="icon" type="image/x-icon" href="img/ConvoTools-f.png">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>ConvoTools - Free Online Conversion Tools</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    .convo-card:hover > img {
-      box-shadow: 5px 5px 5px 5px #888888;
-      width: 75% !important;
-      transition: 0.3s;
-      position: relative;
-      margin: 20px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Poppins, sans-serif
     }
-    .convo-card > img {
-      width: 100% !important;
-      transition: 0.3s;
-    }
+
     body {
-      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #333
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 8%;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05)
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      color: #444;
+      font-weight: 500
+    }
+
+    .hero {
+      color: white;
+      padding: 500px 8%;
       text-align: center;
+      background-image: url('./img/tools.png');
+      /* background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60'); */
+      background-size: cover;
+      background-position: center;
+      background-blend-mode: overlay;
     }
-    #color-box {
-      width: 200px;
-      height: 200px;
-      border: 1px solid #000;
-      margin-top: 20px;
-      display: inline-block;
-      opacity: 0.2;
+
+    .hero h1 {
+      font-size: 46px;
+      margin-bottom: 15px
     }
-    #color-code {
-      font-size: 18px;
-      margin-top: 10px;
+
+    .hero p {
+      color: white;
+      margin-bottom: 30px
     }
-    .convo-card {
-      margin-bottom: 20px;
+
+    .hero button {
+      padding: 14px 30px;
+      border: none;
+      background: #2563eb;
+      color: white;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer
     }
-    @media (max-width: 768px) {
-      .convo-card img {
-        width: 90% !important;
-      }
+
+    .tools {
+      padding: 60px 8%
+    }
+
+    .tools h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 32px
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: 0.3s;
+      text-decoration: none;
+      color: inherit
+    }
+
+    .card i {
+      font-size: 28px;
+      color: #2563eb;
+      margin-bottom: 15px
+    }
+
+    .card:hover {
+      transform: translateY(-5px)
+    }
+
+    .converter {
+      padding: 70px 8%;
+      background: white
+    }
+
+    .converter h2 {
+      text-align: center;
+      margin-bottom: 30px
+    }
+
+    .convert-box {
+      max-width: 500px;
+      margin: auto;
+      text-align: center
+    }
+
+    .convert-box input,
+    select {
+      padding: 12px;
+      width: 100%;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px
+    }
+
+    .convert-box button {
+      padding: 12px 25px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer
+    }
+
+    .result {
+      margin-top: 15px;
+      font-weight: 600
+    }
+
+    .features {
+      padding: 70px 8%
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px
+    }
+
+    .feature {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05)
+    }
+
+    .feature i {
+      font-size: 30px;
+      color: #2563eb;
+      margin-bottom: 10px
+    }
+
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 30px;
+      margin-top: 60px
     }
   </style>
 </head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="./index.html">
-        <img src="img/ConvoTools-s.png" alt="ConvoTools" style="width: 150px;"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="https://www.buymeacoffee.com/convotools" target="_blank">Buy me a coffee</a></li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Tools</a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="./json-to-excel.html">JSON to Excel</a></li>
-              <li><a class="dropdown-item" href="./excel-to-json.html">Excel to JSON</a></li>
-              <li><a class="dropdown-item" href="./json-stringify.html">JSON Stringify</a></li>
-              <li><a class="dropdown-item" href="./json-unstringify.html">JSON Unstringify</a></li>
-              <li><a class="dropdown-item" href="./text-to-one-line.html">Convert to One Line</a></li>
-            </ul>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
 
-  <div class="container mt-3">
-    <div class="card">
-      <div class="card-header text-center">
-        <h5>Conversion Tools</h5>
+<body>
+
+  <header>
+    <!-- <div class="logo">ConvoTools</div> -->
+    <a class="logo" href="./index.html">
+      <img src="img/ConvoTools-s.png" alt="ConvoTools" style="width: 150px;">
+    </a>
+    <nav>
+      <a href="#tools">Tools</a>
+      <!-- <a href="#converter">Converter</a> -->
+      <a href="#features">Features</a>
+      <!-- <a href="./contribution.html">❤️ Contribute</a> -->
+      <a href="https://www.buymeacoffee.com/convotools" target="_blank">Buy me a coffee</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- <div id="visitorCounter" style="margin-top:20px;font-size:18px;font-weight:500"></div> -->
+    <!-- <h1>All Your Conversion Tools in One Place</h1>
+    <p>Fast, accurate and free online conversion tools for everyday calculations.</p>
+    <button onclick="document.getElementById('tools').scrollIntoView()">Explore Tools</button> -->
+  </section>
+
+  <!-- <div class="analytics-panel">
+
+    <h2>📊 Live Site Analytics</h2>
+
+    <div class="analytics-grid">
+
+      <div class="card">
+        <h3>👥 Total Visitors</h3>
+        <p id="totalVisitors">Loading...</p>
       </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-3 convo-card">
-            <img src="./img/Slide1.PNG" alt="slide1">
-            <div class="text-center">
-              <h4>1</h4>
-              <a href="./json-stringify.html" class="btn w-100 btn-outline-primary">Try Converting...</a>
-            </div>
-          </div>
-          <div class="col-3 convo-card">
-            <img src="./img/Slide2.PNG" alt="slide2">
-            <div class="text-center">
-              <h4>2</h4>
-              <a href="./json-unstringify.html" class="btn w-100 btn-outline-primary">Try Converting...</a>
-            </div>
-          </div>
-          <div class="col-3 convo-card">
-            <img src="./img/Slide3.PNG" alt="slide3">
-            <div class="text-center">
-              <h4>3</h4>
-              <a href="./text-to-one-line.html" class="btn w-100 btn-outline-primary">Try Converting...</a>
-            </div>
-          </div>
-          <div class="col-3 convo-card">
-            <img src="./img/Slide4.PNG" alt="slide4">
-            <div class="text-center">
-              <h4>4</h4>
-              <a href="./json-to-excel.html" class="btn w-100 btn-outline-primary">Try Converting...</a>
-            </div>
-          </div>
-          <div class="col-3 convo-card">
-            <img src="./img/Slide5.PNG" alt="slide5">
-            <div class="text-center">
-              <h4>5</h4>
-              <a href="./excel-to-json.html" class="btn w-100 btn-outline-primary">Try Converting...</a>
-            </div>
-          </div>
-          <div class="col-3 convo-card">
-            <img src="./img/Slide6.PNG" alt="slide6">
-            <div class="text-center">
-              <h4>6</h4>
-              <a class="btn w-100 btn-outline-primary disabled" disabled>Try Converting...</a>
-            </div>
-          </div>
-          <div class="col-3 convo-card">
-            <img src="./img/Slide6.PNG" alt="slide7">
-            <div class="text-center">
-              <h4>7</h4>
-              <a class="btn w-100 btn-outline-primary disabled">Try Converting...</a>
-            </div>
-          </div>
-          <div class="col-3 convo-card">
-            <img src="./img/Slide6.PNG" alt="slide8">
-            <div class="text-center">
-              <h4>8</h4>
-              <a class="btn w-100 btn-outline-primary disabled">Try Converting...</a>
-            </div>
-          </div>
-          <div class="col-3 convo-card">
-            <p>Word to PDF</p>
-            <div class="text-center">
-              <h4>5.1</h4>
-              <a href="./word-to-pdf.html" class="btn w-100 btn-outline-primary">Try Converting...</a>
-            </div>
-          </div>
-        </div>
-        <div class="text-center mt-4">
-          <h1>Light Color Generator</h1>
-          <div id="color-box"></div>
-          <p id="color-code"></p>
-          <button class="btn btn-outline-warning" onclick="generateLightColor()">Generate Light Color</button>
-        </div>
+
+      <div class="card">
+        <h3>🧑 Unique Visitors</h3>
+        <p id="uniqueVisitors">Loading...</p>
       </div>
-      <div class="card-footer text-center">
-        <strong style="font-size: 12px;">All Rights Reserved | Convotools 2024</strong>
+
+      <div class="card">
+        <h3>🔧 Most Used Tool</h3>
+        <p id="mostUsedTool">Loading...</p>
+      </div>
+
+      <div class="card">
+        <h3>🌍 Top Traffic Source</h3>
+        <p id="topSource">Loading...</p>
+      </div>
+
+    </div>
+
+  </div> -->
+
+  <section class="tools" id="tools">
+    <h2>Popular Conversion Tools</h2>
+    <div class="grid">
+
+      <a class="card" href="./json-stringify.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-code"></i>
+        <h3>JSON Stringify</h3>
+        <p>Convert formatted JSON objects into a single escaped string for APIs and payloads.</p>
+      </a>
+
+      <a class="card" href="./json-unstringify.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-code-branch"></i>
+        <h3>JSON Unstringify</h3>
+        <p>Convert escaped JSON strings back into readable JSON format instantly.</p>
+      </a>
+
+      <a class="card" href="./json-to-excel.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-file-excel"></i>
+        <h3>JSON File to Excel</h3>
+        <p>Convert JSON data into structured Excel sheets for easy analysis.</p>
+      </a>
+
+      <a class="card" href="./excel-to-json.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-table"></i>
+        <h3>Excel to JSON</h3>
+        <p>Transform Excel spreadsheets into JSON format for APIs and applications.</p>
+      </a>
+
+      <a class="card" href="./json-to-table.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-table"></i>
+        <h3>JSON to Table</h3>
+        <p>Transform JSON data into a tabular format for easy viewing and analysis.</p>
+      </a>
+
+      <a class="card" href="./text-to-one-line.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-lines-leaning"></i>
+        <h3>Text to One Line</h3>
+        <p>Transform multi-line text into a single line for logs, scripts, and payloads.</p>
+      </a>
+
+      <a class="card" href="./word-to-pdf.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-file-pdf"></i>
+        <h3>Word to PDF</h3>
+        <p>Convert Word documents into high-quality PDF files in seconds.</p>
+      </a>
+
+      <a class="card" href="./json-beautifier.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-file-code"></i>
+        <h3>JSON Beautifier</h3>
+        <p>Format and beautify JSON data for better readability.</p>
+      </a>
+
+      <a class="card" href="./jpg-to-png.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-file-image"></i>
+        <h3>JPG to PNG</h3>
+        <p>Convert JPG images to PNG format.</p>
+      </a>
+
+      <a class="card" href="./base64-encode-decode.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-lock"></i>
+        <h3>Base64 Encoder / Decoder</h3>
+        <p>Encode and decode Base64 strings.</p>
+      </a>
+
+      <a class="card" href="./json-to-xml.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-file-code"></i>
+        <h3>JSON to XML</h3>
+        <p>Convert JSON data to XML format.</p>
+      </a>
+
+      <a class="card" href="./xml-to-json.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-file-code"></i>
+        <h3>XML to JSON</h3>
+        <p>Convert XML data to JSON format.</p>
+      </a>
+
+      <a class="card" href="./emi-calculator.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-calculator"></i>
+        <h3>EMI Calculator</h3>
+        <p>Calculate your monthly EMI payments.</p>
+      </a>
+
+      <a class="card disabled" href="#"
+        style="text-decoration:none;color:inherit;display:block;pointer-events:none;opacity:0.6">
+        <i class="fa-solid fa-file"></i>
+        <h3>More Coming Soon</h3>
+        <p>Stay tuned for more conversion tools being added regularly.</p>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- <section class="converter" id="converter">
+    <h2>Quick Length Converter</h2>
+    <div class="convert-box">
+      <input type="number" id="inputValue" placeholder="Enter value">
+      <select id="fromUnit">
+        <option value="m">Meters</option>
+        <option value="km">Kilometers</option>
+        <option value="mi">Miles</option>
+      </select>
+      <select id="toUnit">
+        <option value="m">Meters</option>
+        <option value="km">Kilometers</option>
+        <option value="mi">Miles</option>
+      </select>
+      <button onclick="convert()">Convert</button>
+      <div class="result" id="result"></div>
+    </div>
+  </section> -->
+
+  <section class="features" id="features">
+    <h2 style="text-align:center;margin-bottom:40px">Why Use ConvoTools</h2>
+    <div class="feature-grid">
+      <div class="feature"><i class="fa-solid fa-bolt"></i>
+        <h3>Instant Results</h3>
+        <p>Get real-time conversion results instantly.</p>
+      </div>
+      <div class="feature"><i class="fa-solid fa-mobile-screen"></i>
+        <h3>Mobile Friendly</h3>
+        <p>Works perfectly on phones and tablets.</p>
+      </div>
+      <div class="feature"><i class="fa-solid fa-toolbox"></i>
+        <h3>50+ Tools</h3>
+        <p>Many conversion utilities in one place.</p>
+      </div>
+      <div class="feature"><i class="fa-solid fa-lock"></i>
+        <h3>Secure & Free</h3>
+        <p>No signup required. Completely free.</p>
       </div>
     </div>
-  </div>
+  </section>
+
+  <footer>
+    <p>© 2026 ConvoTools. All rights reserved.</p>
+  </footer>
 
   <script>
-    function generateLightColor() {
-      const r = Math.floor(Math.random() * 128) + 127;
-      const g = Math.floor(Math.random() * 128) + 127;
-      const b = Math.floor(Math.random() * 128) + 127;
-      const randomColor = `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
-      document.getElementById('color-box').style.backgroundColor = randomColor;
-      document.getElementById('color-code').textContent = `Color Code: ${randomColor}`;
+
+    const endpoint = "https://script.google.com/macros/s/AKfycbzKGNNlKFnxO9qZ7tZ2n4kjxsJBSANnaolmsYDu6UUYYWXBVUl_RQSC2Na8r0Q6HXTUTw/exec";
+
+    const payload = {
+      page: document.title || "landing",
+      tool: "convotools_homepage",
+      userAgent: navigator.userAgent,
+      referrer: document.referrer,
+      screen: screen.width + "x" + screen.height,
+      timestamp: new Date().toISOString()
+    };
+
+    fetch(endpoint, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    function showAnalytics(data) {
+
+      document.getElementById("totalVisitors").innerText = data.totalVisitors || 0;
+      document.getElementById("uniqueVisitors").innerText = data.uniqueVisitors || 0;
+      document.getElementById("mostUsedTool").innerText = data.mostUsedTool || "-";
+      document.getElementById("topSource").innerText = data.topSource || "-";
+
+    }
+
+    function loadAnalytics() {
+
+      var script = document.createElement("script");
+
+      script.src = endpoint + "?action=analytics&callback=showAnalytics";
+
+      document.body.appendChild(script);
+    }
+
+    window.onload = loadAnalytics;
+
+    function convert() {
+      let value = parseFloat(document.getElementById('inputValue').value)
+      let from = document.getElementById('fromUnit').value
+      let to = document.getElementById('toUnit').value
+
+      if (isNaN(value)) {
+        document.getElementById('result').innerText = 'Enter a valid number'
+        return
+      }
+
+      let meters
+      if (from === 'm') meters = value
+      if (from === 'km') meters = value * 1000
+      if (from === 'mi') meters = value * 1609.34
+
+      let result
+      if (to === 'm') result = meters
+      if (to === 'km') result = meters / 1000
+      if (to === 'mi') result = meters / 1609.34
+
+      document.getElementById('result').innerText = 'Result: ' + result.toFixed(4) + ' ' + to
     }
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

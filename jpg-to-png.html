@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ConvoTools - JPG to PNG</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Poppins, sans-serif
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #333
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05)
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2563eb
+        }
+
+        nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: #444;
+            font-weight: 500
+        }
+
+        .converter {
+            padding: 70px 8%;
+        }
+
+        .converter h2 {
+            text-align: center;
+            margin-bottom: 30px
+        }
+
+        .convert-box {
+            max-width: 600px;
+            margin: auto;
+            text-align: center
+        }
+
+        .convert-box input {
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px
+        }
+
+        button {
+            padding: 12px 25px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            width: 100%
+        }
+
+        .clear-btn {
+            background: #6b7280
+        }
+
+        .loader {
+            display: none;
+            margin-top: 15px
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #2563eb;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            animation: spin 1s linear infinite;
+            margin: 10px auto
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg)
+            }
+
+            100% {
+                transform: rotate(360deg)
+            }
+        }
+
+        .result {
+            margin-top: 15px;
+            font-weight: 600
+        }
+
+        footer {
+            background: #111;
+            color: #aaa;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <a class="logo" href="./index.html">
+            <img src="img/ConvoTools-s.png" alt="ConvoTools" style="width:150px;">
+        </a>
+
+        <nav>
+            <a href="./index.html">Home</a>
+            <a href="https://www.buymeacoffee.com/convotools" target="_blank">
+                Buy me a coffee
+            </a>
+        </nav>
+
+    </header>
+
+
+    <section class="converter">
+
+        <h2>JPG to PNG Converter</h2>
+
+        <div class="convert-box">
+
+            <label style="display:block;margin-bottom:6px;font-weight:500">
+                Upload JPG Image
+            </label>
+
+            <input type="file" id="jpgInput" accept="image/jpeg">
+
+            <button onclick="convertJpgToPng()">
+                <i class="fa-solid fa-image"></i> Convert to PNG
+            </button>
+
+            <button onclick="clearImage()" class="clear-btn">
+                Clear
+            </button>
+
+            <canvas id="canvas" style="display:none"></canvas>
+
+            <div class="loader" id="loader">
+                <div class="spinner"></div>
+                Converting...
+            </div>
+
+            <div class="result" id="result"></div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        <p>© 2026 ConvoTools. All rights reserved.</p>
+    </footer>
+
+
+    <script>
+
+    const endpoint = "https://script.google.com/macros/s/AKfycbzKGNNlKFnxO9qZ7tZ2n4kjxsJBSANnaolmsYDu6UUYYWXBVUl_RQSC2Na8r0Q6HXTUTw/exec";
+
+    const payload = {
+      page: document.title || "landing",
+      tool: "convotools_homepage",
+      userAgent: navigator.userAgent,
+      referrer: document.referrer,
+      screen: screen.width + "x" + screen.height,
+      timestamp: new Date().toISOString()
+    };
+
+    fetch(endpoint, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+        function convertJpgToPng() {
+
+            const fileInput = document.getElementById('jpgInput')
+            const file = fileInput.files[0]
+
+            const loader = document.getElementById('loader')
+            const result = document.getElementById('result')
+
+            if (!file) {
+                alert("Please upload a JPG image")
+                return
+            }
+
+            loader.style.display = "block"
+
+            const reader = new FileReader()
+
+            reader.onload = function (e) {
+
+                const img = new Image()
+
+                img.onload = function () {
+
+                    const canvas = document.getElementById('canvas')
+                    const ctx = canvas.getContext('2d')
+
+                    canvas.width = img.width
+                    canvas.height = img.height
+
+                    ctx.drawImage(img, 0, 0)
+
+                    canvas.toBlob(function (blob) {
+
+                        const link = document.createElement("a")
+
+                        link.download = "converted.png"
+                        link.href = URL.createObjectURL(blob)
+
+                        link.click()
+
+                        loader.style.display = "none"
+                        result.innerText = "PNG downloaded successfully."
+
+                    }, "image/png")
+
+                }
+
+                img.src = e.target.result
+
+            }
+
+            reader.readAsDataURL(file)
+
+        }
+
+
+        function clearImage() {
+
+            document.getElementById('jpgInput').value = ""
+            document.getElementById('result').innerText = ""
+
+        }
+
+    </script>
+
+</body>
+
+</html>

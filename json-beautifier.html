@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ConvoTools - JSON Stringify</title>
+    <title>ConvoTools - JSON Beautifier</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -47,19 +46,18 @@
         }
 
         .converter {
-            padding: 46.6px 8%;
+            padding: 70px 8%;
         }
 
         .converter h2 {
             text-align: center;
+            margin-bottom: 30px
         }
 
-        .tool-box {
-            max-width: 1000px;
+        .convert-box {
+            max-width: 900px;
             margin: auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px
+            text-align: center
         }
 
         textarea {
@@ -69,12 +67,8 @@
             border: 1px solid #ddd;
             border-radius: 6px;
             resize: none;
-            font-family: monospace
-        }
-
-        .button-area {
-            grid-column: span 2;
-            text-align: center
+            font-family: monospace;
+            margin-bottom: 15px
         }
 
         button {
@@ -84,7 +78,11 @@
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 15px
+            margin-right: 10px
+        }
+
+        .clear-btn {
+            background: #6b7280
         }
 
         footer {
@@ -92,18 +90,7 @@
             color: #aaa;
             text-align: center;
             padding: 30px;
-        }
-
-        @media(max-width:768px) {
-
-            .tool-box {
-                grid-template-columns: 1fr
-            }
-
-            .button-area {
-                grid-column: span 1
-            }
-
+            margin-top: 60px
         }
     </style>
 </head>
@@ -118,40 +105,41 @@
 
         <nav>
             <a href="./index.html">Home</a>
-            <a href="https://www.buymeacoffee.com/convotools" target="_blank">Buy me a coffee</a>
+            <a href="https://www.buymeacoffee.com/convotools" target="_blank">
+                Buy me a coffee
+            </a>
         </nav>
 
     </header>
 
-
     <section class="converter">
 
-        <h2>JSON Stringify Tool</h2><br>
+        <h2>JSON Beautifier</h2>
 
-        <div class="tool-box">
+        <div class="convert-box">
 
-            <textarea id="input" placeholder="Paste JSON or text here..."></textarea>
+            <textarea id="input" placeholder="Paste minified JSON here..."></textarea>
 
-            <textarea id="output" readonly placeholder="Stringified result will appear here..."></textarea>
+            <button onclick="beautifyJSON()">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Beautify JSON
+            </button>
 
-            <div class="button-area">
-                <button onclick="displayJson()">
-                    <i class="fa-solid fa-code"></i> Stringify JSON
-                </button>
-                <button onclick="clearData()">
-                    Clear Data
-                </button>
-            </div>
+            <button onclick="clearData()" class="clear-btn">
+                Clear
+            </button>
+
+            <br>
+            <br>
+
+            <textarea id="output" placeholder="Beautified JSON will appear here..." readonly></textarea>
 
         </div>
 
     </section>
 
-
     <footer>
         <p>© 2026 ConvoTools. All rights reserved.</p>
     </footer>
-
 
     <script>
 
@@ -173,30 +161,30 @@
       body: JSON.stringify(payload)
     });
 
-        function displayJson() {
+        function beautifyJSON() {
 
-            var inputTextarea = document.getElementById("input");
-            var outputTextarea = document.getElementById("output");
-
-            var inputData = inputTextarea.value;
+            const input = document.getElementById("input").value
 
             try {
 
-                outputTextarea.value = JSON.stringify(inputData);
+                const json = JSON.parse(input)
 
-            } catch (error) {
+                document.getElementById("output").value =
+                    JSON.stringify(json, null, 2)
 
-                outputTextarea.value = "Invalid JSON data:\\n" + error.message;
+            } catch (e) {
+
+                alert("Invalid JSON")
 
             }
 
         }
 
         function clearData() {
-            var fileInput = document.getElementById('input');
-            var nameInput = document.getElementById('output');
-            fileInput.value = '';
-            nameInput.value = '';
+
+            document.getElementById("input").value = ""
+            document.getElementById("output").value = ""
+
         }
 
     </script>

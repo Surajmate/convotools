@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ConvoTools - JSON Stringify</title>
+    <title>ConvoTools - Base64 Encoder / Decoder</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -47,34 +47,29 @@
         }
 
         .converter {
-            padding: 46.6px 8%;
+            padding: 70px 8%;
         }
 
         .converter h2 {
             text-align: center;
+            margin-bottom: 30px
         }
 
-        .tool-box {
-            max-width: 1000px;
+        .convert-box {
+            max-width: 800px;
             margin: auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px
+            text-align: center
         }
 
         textarea {
             width: 100%;
-            height: 320px;
+            height: 160px;
             padding: 12px;
             border: 1px solid #ddd;
             border-radius: 6px;
             resize: none;
-            font-family: monospace
-        }
-
-        .button-area {
-            grid-column: span 2;
-            text-align: center
+            font-family: monospace;
+            margin-bottom: 15px
         }
 
         button {
@@ -84,7 +79,12 @@
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 15px
+            margin-bottom: 10px;
+            width: 100%
+        }
+
+        .clear-btn {
+            background: #6b7280
         }
 
         footer {
@@ -92,18 +92,7 @@
             color: #aaa;
             text-align: center;
             padding: 30px;
-        }
-
-        @media(max-width:768px) {
-
-            .tool-box {
-                grid-template-columns: 1fr
-            }
-
-            .button-area {
-                grid-column: span 1
-            }
-
+            margin-top: 60px
         }
     </style>
 </head>
@@ -118,7 +107,9 @@
 
         <nav>
             <a href="./index.html">Home</a>
-            <a href="https://www.buymeacoffee.com/convotools" target="_blank">Buy me a coffee</a>
+            <a href="https://www.buymeacoffee.com/convotools" target="_blank">
+                Buy me a coffee
+            </a>
         </nav>
 
     </header>
@@ -126,22 +117,33 @@
 
     <section class="converter">
 
-        <h2>JSON Stringify Tool</h2><br>
+        <h2>Base64 Encoder / Decoder</h2>
 
-        <div class="tool-box">
+        <div class="convert-box">
 
-            <textarea id="input" placeholder="Paste JSON or text here..."></textarea>
+            <label style="display:block;margin-bottom:6px;font-weight:500">
+                Input
+            </label>
 
-            <textarea id="output" readonly placeholder="Stringified result will appear here..."></textarea>
+            <textarea id="base64Input" placeholder="Enter text or Base64 string..."></textarea>
 
-            <div class="button-area">
-                <button onclick="displayJson()">
-                    <i class="fa-solid fa-code"></i> Stringify JSON
-                </button>
-                <button onclick="clearData()">
-                    Clear Data
-                </button>
-            </div>
+            <button onclick="encodeBase64()">
+                <i class="fa-solid fa-lock"></i> Encode to Base64
+            </button>
+
+            <button onclick="decodeBase64()">
+                <i class="fa-solid fa-unlock"></i> Decode from Base64
+            </button>
+
+            <button onclick="clearBase64()" class="clear-btn">
+                Clear
+            </button>
+
+            <label style="display:block;margin-top:20px;margin-bottom:6px;font-weight:500">
+                Output
+            </label>
+
+            <textarea id="base64Output" readonly placeholder="Result will appear here..."></textarea>
 
         </div>
 
@@ -173,30 +175,47 @@
       body: JSON.stringify(payload)
     });
 
-        function displayJson() {
+        function encodeBase64() {
 
-            var inputTextarea = document.getElementById("input");
-            var outputTextarea = document.getElementById("output");
-
-            var inputData = inputTextarea.value;
+            let input = document.getElementById("base64Input").value
 
             try {
 
-                outputTextarea.value = JSON.stringify(inputData);
+                let encoded = btoa(unescape(encodeURIComponent(input)))
 
-            } catch (error) {
+                document.getElementById("base64Output").value = encoded
 
-                outputTextarea.value = "Invalid JSON data:\\n" + error.message;
+            } catch (e) {
+
+                alert("Encoding failed. Please check the input.")
 
             }
 
         }
 
-        function clearData() {
-            var fileInput = document.getElementById('input');
-            var nameInput = document.getElementById('output');
-            fileInput.value = '';
-            nameInput.value = '';
+        function decodeBase64() {
+
+            let input = document.getElementById("base64Input").value
+
+            try {
+
+                let decoded = decodeURIComponent(escape(atob(input)))
+
+                document.getElementById("base64Output").value = decoded
+
+            } catch (e) {
+
+                alert("Invalid Base64 string.")
+
+            }
+
+        }
+
+        function clearBase64() {
+
+            document.getElementById("base64Input").value = ""
+            document.getElementById("base64Output").value = ""
+
         }
 
     </script>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ConvoTools - XML to JSON</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Poppins, sans-serif
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #333
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05)
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2563eb
+        }
+
+        nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: #444;
+            font-weight: 500
+        }
+
+        .converter {
+            padding: 70px 8%;
+        }
+
+        .converter h2 {
+            text-align: center;
+            margin-bottom: 30px
+        }
+
+        .convert-box {
+            max-width: 800px;
+            margin: auto;
+            text-align: center
+        }
+
+        textarea {
+            width: 100%;
+            height: 160px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            resize: none;
+            font-family: monospace;
+            margin-bottom: 15px
+        }
+
+        button {
+            padding: 12px 25px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            width: 100%
+        }
+
+        .clear-btn {
+            background: #6b7280
+        }
+
+        footer {
+            background: #111;
+            color: #aaa;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <a class="logo" href="./index.html">
+            <img src="img/ConvoTools-s.png" alt="ConvoTools" style="width:150px;">
+        </a>
+
+        <nav>
+            <a href="./index.html">Home</a>
+            <a href="https://www.buymeacoffee.com/convotools" target="_blank">
+                Buy me a coffee
+            </a>
+        </nav>
+
+    </header>
+
+
+    <section class="converter">
+
+        <h2>XML to JSON Converter</h2>
+
+        <div class="convert-box">
+
+            <label style="display:block;margin-bottom:6px;font-weight:500">
+                XML Input
+            </label>
+
+            <textarea id="xmlInput" placeholder="Paste XML here..."></textarea>
+
+            <button onclick="convertXmlToJson()">
+                <i class="fa-solid fa-code"></i> Convert to JSON
+            </button>
+
+            <button onclick="clearFields()" class="clear-btn">
+                Clear
+            </button>
+
+            <label style="display:block;margin-top:20px;margin-bottom:6px;font-weight:500">
+                JSON Output
+            </label>
+
+            <textarea id="jsonOutput" readonly placeholder="JSON result will appear here..."></textarea>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        <p>© 2026 ConvoTools. All rights reserved.</p>
+    </footer>
+
+
+    <script>
+
+        function xmlToJson(node) {
+
+            let obj = {}
+
+            if (node.nodeType === 1) {
+                if (node.attributes.length > 0) {
+                    obj["@attributes"] = {}
+                    for (let j = 0; j < node.attributes.length; j++) {
+                        let attr = node.attributes.item(j)
+                        obj["@attributes"][attr.nodeName] = attr.nodeValue
+                    }
+                }
+            }
+
+            if (node.nodeType === 3) {
+                return node.nodeValue.trim()
+            }
+
+            if (node.hasChildNodes()) {
+                for (let i = 0; i < node.childNodes.length; i++) {
+
+                    let item = node.childNodes.item(i)
+                    let nodeName = item.nodeName
+                    let value = xmlToJson(item)
+
+                    if (value === "") continue
+
+                    if (typeof (obj[nodeName]) === "undefined") {
+                        obj[nodeName] = value
+                    }
+                    else {
+                        if (!Array.isArray(obj[nodeName])) {
+                            obj[nodeName] = [obj[nodeName]]
+                        }
+                        obj[nodeName].push(value)
+                    }
+
+                }
+            }
+
+            return obj
+        }
+
+
+        function convertXmlToJson() {
+
+            try {
+
+                let xmlText = document.getElementById("xmlInput").value
+
+                let parser = new DOMParser()
+
+                let xmlDoc = parser.parseFromString(xmlText, "text/xml")
+
+                if (xmlDoc.getElementsByTagName("parsererror").length) {
+                    alert("Invalid XML format")
+                    return
+                }
+
+                let json = xmlToJson(xmlDoc.documentElement)
+
+                document.getElementById("jsonOutput").value =
+                    JSON.stringify(json, null, 2)
+
+            }
+            catch (e) {
+
+                alert("Conversion failed")
+
+            }
+
+        }
+
+
+        function clearFields() {
+
+            document.getElementById("xmlInput").value = ""
+            document.getElementById("jsonOutput").value = ""
+
+        }
+
+    </script>
+
+</body>
+
+</html>

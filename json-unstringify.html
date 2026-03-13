@@ -68,15 +68,10 @@
         function displayJson() {
             var inputTextarea = document.getElementById("input");
             var outputTextarea = document.getElementById("output");
-            // Get data from input textarea
             var inputData = inputTextarea.value;
             try {
-                // Parse the input data as JSON
-                // var jsonData = JSON.parse(inputData);
-                // Convert JSON data back to string and display in output textarea
                 outputTextarea.value = JSON.parse(inputData, null, 2); // Use null and 2 for pretty printing
             } catch (error) {
-                // Display error if input data is not valid JSON
                 outputTextarea.value = "Invalid JSON data:\n" + error.message;
             }
         }
@@ -85,6 +80,24 @@
 
 
     <script type="text/javascript">
+
+    const endpoint = "https://script.google.com/macros/s/AKfycbzKGNNlKFnxO9qZ7tZ2n4kjxsJBSANnaolmsYDu6UUYYWXBVUl_RQSC2Na8r0Q6HXTUTw/exec";
+
+    const payload = {
+      page: document.title || "landing",
+      tool: "convotools_homepage",
+      userAgent: navigator.userAgent,
+      referrer: document.referrer,
+      screen: screen.width + "x" + screen.height,
+      timestamp: new Date().toISOString()
+    };
+
+    fetch(endpoint, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
         function convertJSONtoExcel(jsonData, fileName) {
             var ws = XLSX.utils.json_to_sheet(jsonData);
             var wb = XLSX.utils.book_new();
