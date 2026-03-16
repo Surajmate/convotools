@@ -1,18 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word to PDF Converter</title>
-    <link rel="stylesheet" href="word-to-pdf.css">
+
+    <title>ConvoTools - Word to PDF</title>
+
+    <link rel="icon" href="img/ConvoTools-f.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <script src="https://unpkg.com/docx-preview@0.3.1/dist/docx-preview.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Poppins, sans-serif
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #333
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05)
+        }
+
+        .converter {
+            padding: 46px 8%;
+        }
+
+        .converter h2 {
+            text-align: center;
+        }
+
+        .tool-box {
+            max-width: 1000px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px
+        }
+
+        .preview {
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: white;
+            padding: 20px;
+            overflow: auto
+        }
+
+        input[type=file] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: white
+        }
+
+        .button-area {
+            text-align: center
+        }
+
+        button {
+            padding: 12px 25px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            margin-right: 10px
+        }
+
+        footer {
+            background: #111;
+            color: #aaa;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px
+        }
+    </style>
+
 </head>
+
 <body>
-    <h1>Word to PDF Converter</h1>
-    <input type="file" id="fileInput" accept=".docx"/>
-    <button id="convertButton">Convert</button>
-    <a id="downloadLink" style="display: none;">Download PDF</a>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.2/mammoth.browser.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-   <script src="word-to-pdf.js"></script>
+
+    <header>
+
+        <a href="./index.html">
+            <img src="img/ConvoTools-s.png" style="width:150px;">
+        </a>
+
+    </header>
+
+    <section class="converter">
+
+        <h2>Word to PDF Converter</h2><br>
+
+        <div class="tool-box">
+
+            <input type="file" id="fileInput" accept=".docx">
+
+            <div id="preview" class="preview">
+                Upload Word file to preview...
+            </div>
+
+            <div class="button-area">
+
+                <button onclick="convertPDF()">
+                    <i class="fa-solid fa-file-pdf"></i> Convert to PDF
+                </button>
+
+                <button onclick="clearData()">Clear</button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+        <p>© 2026 ConvoTools. All rights reserved.</p>
+    </footer>
+
+    <script>
+
+        let preview = document.getElementById("preview");
+
+        document.getElementById("fileInput").addEventListener("change", function (e) {
+
+            const file = e.target.files[0];
+
+            if (!file) return;
+
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+
+                const arrayBuffer = event.target.result;
+
+                preview.innerHTML = "";
+
+                docx.renderAsync(arrayBuffer, preview);
+
+            };
+
+            reader.readAsArrayBuffer(file);
+
+        });
+
+
+        function convertPDF() {
+
+            html2pdf()
+                .from(preview)
+                .set({
+                    margin: 10,
+                    filename: "converted.pdf",
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                })
+                .save();
+
+        }
+
+        function clearData() {
+
+            document.getElementById("fileInput").value = "";
+
+            preview.innerHTML = "Upload Word file to preview...";
+
+        }
+
+    </script>
+
 </body>
+
 </html>

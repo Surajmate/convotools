@@ -107,9 +107,9 @@
 
         <nav>
             <a href="./index.html">Home</a>
-            <a href="https://www.buymeacoffee.com/convotools" target="_blank">
+            <!-- <a href="https://www.buymeacoffee.com/convotools" target="_blank">
                 Buy me a coffee
-            </a>
+            </a> -->
         </nav>
 
     </header>
@@ -152,6 +152,24 @@
 
 
     <script>
+
+        const endpoint = "https://script.google.com/macros/s/AKfycbzKGNNlKFnxO9qZ7tZ2n4kjxsJBSANnaolmsYDu6UUYYWXBVUl_RQSC2Na8r0Q6HXTUTw/exec";
+
+        const payload = {
+            page: document.title || "landing",
+            tool: "convotools_homepage",
+            userAgent: navigator.userAgent,
+            referrer: document.referrer,
+            screen: screen.width + "x" + screen.height,
+            timestamp: new Date().toISOString()
+        };
+
+        fetch(endpoint, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
 
         function xmlToJson(node) {
 
