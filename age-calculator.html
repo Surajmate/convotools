@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConvoTools - Age Calculator</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Poppins
+        }
+
+        body {
+            background: #f5f7fb
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: #fff
+        }
+
+        .converter {
+            padding: 70px 8%
+        }
+
+        .converter h2 {
+            text-align: center;
+            margin-bottom: 30px
+        }
+
+        .convert-box {
+            max-width: 600px;
+            margin: auto;
+            text-align: center
+        }
+
+        input {
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px
+        }
+
+        button {
+            padding: 12px;
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            width: 100%;
+            margin-bottom: 10px
+        }
+
+        .clear-btn {
+            background: #6b7280
+        }
+
+        .result {
+            margin-top: 15px;
+            font-weight: 600
+        }
+
+        footer {
+            background: #111;
+            color: #aaa;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="img/ConvoTools-s.png" style="width:150px;">
+    </header>
+
+    <section class="converter">
+        <h2>Age Calculator</h2>
+
+        <div class="convert-box">
+
+            <input type="date" id="dob">
+
+            <button onclick="calculateAge()">
+                <i class="fa-solid fa-calendar"></i> Calculate Age
+            </button>
+
+            <button onclick="clearData()" class="clear-btn">Clear</button>
+
+            <div class="result" id="result"></div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 ConvoTools. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function calculateAge() {
+            const dob = new Date(document.getElementById("dob").value);
+            const today = new Date();
+
+            let y = today.getFullYear() - dob.getFullYear();
+            let m = today.getMonth() - dob.getMonth();
+            let d = today.getDate() - dob.getDate();
+
+            if (d < 0) { m--; d += 30; }
+            if (m < 0) { y--; m += 12; }
+
+            document.getElementById("result").innerText =
+                `Age: ${y} years, ${m} months, ${d} days`;
+        }
+
+        function clearData() {
+            document.getElementById("dob").value = "";
+            document.getElementById("result").innerText = "";
+        }
+    </script>
+
+</body>
+
+</html>

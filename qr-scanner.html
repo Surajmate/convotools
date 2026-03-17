@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>QR Code Scanner - Free Online Tool | ConvoTools</title>
+    <meta name="description"
+        content="Scan QR codes instantly using your camera. Free QR Scanner tool by ConvoTools. Fast, secure and easy to use.">
+
+    <!-- SEO -->
+    <meta name="keywords" content="QR Scanner, Scan QR Code Online, QR Reader, Camera QR Scanner, ConvoTools">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid #38bdf8;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #1e293b;
+            border-radius: 8px;
+            word-break: break-all;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #38bdf8;
+            color: #000;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #0ea5e9;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>📷 QR Code Scanner</header>
+
+    <div class="container">
+        <video id="preview"></video>
+
+        <div class="result" id="result">
+            Scan a QR code to see result...
+        </div>
+
+        <button onclick="copyResult()">Copy</button>
+        <button onclick="openLink()">Open Link</button>
+    </div>
+
+    <footer>© 2026 ConvoTools.in</footer>
+
+    <!-- QR Scanner Library -->
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
+    <script>
+        const resultBox = document.getElementById("result");
+        let scannedText = "";
+
+        function onScanSuccess(decodedText) {
+            scannedText = decodedText;
+            resultBox.innerText = decodedText;
+        }
+
+        function startScanner() {
+            const html5QrCode = new Html5Qrcode("preview");
+
+            Html5Qrcode.getCameras().then(devices => {
+                if (devices && devices.length) {
+                    html5QrCode.start(
+                        devices[0].id,
+                        {
+                            fps: 10,
+                            qrbox: 250
+                        },
+                        onScanSuccess
+                    );
+                }
+            }).catch(err => {
+                resultBox.innerText = "Camera access denied!";
+            });
+        }
+
+        function copyResult() {
+            if (!scannedText) return alert("No data to copy");
+            navigator.clipboard.writeText(scannedText);
+            alert("Copied!");
+        }
+
+        function openLink() {
+            if (!scannedText) return alert("No data found");
+
+            if (scannedText.startsWith("http")) {
+                window.open(scannedText, "_blank");
+            } else {
+                alert("Not a valid URL");
+            }
+        }
+
+        startScanner();
+    </script>
+
+</body>
+
+</html>
