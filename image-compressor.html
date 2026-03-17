@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConvoTools - Image Compressor</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+        body {background:#f5f7fb;color:#333}
+
+        header {
+            display:flex;justify-content:space-between;align-items:center;
+            padding:20px 8%;background:white;
+            box-shadow:0 2px 8px rgba(0,0,0,0.05)
+        }
+
+        .logo img {width:150px}
+
+        nav a {
+            margin-left:25px;text-decoration:none;color:#444;font-weight:500
+        }
+
+        .converter {padding:70px 8%}
+        .converter h2 {text-align:center;margin-bottom:30px}
+
+        .convert-box {max-width:900px;margin:auto;text-align:center}
+
+        input[type="file"] {
+            margin-bottom:15px;
+        }
+
+        input[type="range"] {
+            width:100%;
+            margin-bottom:15px;
+        }
+
+        button {
+            padding:12px 25px;background:#2563eb;color:white;
+            border:none;border-radius:6px;cursor:pointer;margin-right:10px
+        }
+
+        .clear-btn {background:#6b7280}
+
+        .preview {
+            margin-top:20px;
+        }
+
+        img {
+            max-width:100%;
+            border-radius:8px;
+            margin-top:10px;
+        }
+
+        .info {
+            margin-top:10px;
+            font-size:14px;
+        }
+
+        footer {
+            background:#111;color:#aaa;text-align:center;
+            padding:30px;margin-top:60px
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a class="logo" href="./index.html">
+        <img src="img/ConvoTools-s.png">
+    </a>
+    <nav>
+        <a href="./index.html">Home</a>
+    </nav>
+</header>
+
+<section class="converter">
+
+    <h2>Image Compressor</h2>
+
+    <div class="convert-box">
+
+        <input type="file" id="upload" accept="image/*">
+
+        <label>Compression Level: <span id="qualityValue">70</span>%</label>
+        <input type="range" id="quality" min="10" max="100" value="70">
+
+        <button onclick="compressImage()">
+            <i class="fa-solid fa-compress"></i> Compress Image
+        </button>
+
+        <button onclick="clearAll()" class="clear-btn">Clear</button>
+
+        <div class="preview" id="preview"></div>
+
+        <br><br>
+
+        <!-- SEO CONTENT -->
+        <div style="text-align:left;">
+
+            <p><b>✅ What is Image Compressor?</b></p><br>
+
+            <p>An Image Compressor reduces the file size of images without significantly affecting quality. It helps improve website performance and saves storage.</p><br>
+
+            <p><b>✅ How to Use Image Compressor?</b></p><br>
+
+            <p>> Upload your image</p><br>
+            <p>> Adjust compression level</p><br>
+            <p>> Click Compress</p><br>
+            <p>> Download optimized image</p><br>
+
+            <p><b>✅ Features</b></p><br>
+
+            <p>⚡ Fast compression</p><br>
+            <p>🖼 Maintains quality</p><br>
+            <p>🔐 Secure (browser-based)</p><br>
+            <p>💯 Free to use</p><br>
+
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 ConvoTools. All rights reserved.</p>
+</footer>
+
+<script>
+
+const qualitySlider = document.getElementById("quality");
+const qualityValue = document.getElementById("qualityValue");
+
+qualitySlider.oninput = () => {
+    qualityValue.innerText = qualitySlider.value;
+};
+
+function compressImage() {
+
+    const file = document.getElementById("upload").files[0];
+
+    if (!file) {
+        alert("Please upload an image");
+        return;
+    }
+
+    const quality = qualitySlider.value / 100;
+
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+
+        const img = new Image();
+        img.src = e.target.result;
+
+        img.onload = function () {
+
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            ctx.drawImage(img, 0, 0);
+
+            const compressedData = canvas.toDataURL("image/jpeg", quality);
+
+            const originalSize = (file.size / 1024).toFixed(2);
+            const compressedSize = (compressedData.length / 1024).toFixed(2);
+
+            document.getElementById("preview").innerHTML = `
+                <div>
+                    <p><b>Original Size:</b> ${originalSize} KB</p>
+                    <p><b>Compressed Size:</b> ${compressedSize} KB</p>
+                    <a href="${compressedData}" download="compressed.jpg">
+                        <button style="margin-top:10px;">
+                            <i class="fa-solid fa-download"></i> Download Image
+                        </button>
+                    </a>
+                    <img src="${compressedData}">
+                </div>
+            `;
+        };
+    };
+
+    reader.readAsDataURL(file);
+}
+
+function clearAll() {
+    document.getElementById("upload").value = "";
+    document.getElementById("preview").innerHTML = "";
+}
+
+</script>
+
+</body>
+</html>

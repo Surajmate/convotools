@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>ConvoTools - EMI Calculator</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         * {
@@ -33,6 +35,10 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05)
         }
 
+        .logo img {
+            width: 150px;
+        }
+
         nav a {
             margin-left: 25px;
             text-decoration: none;
@@ -50,17 +56,18 @@
         }
 
         .convert-box {
-            max-width: 600px;
+            max-width: 900px;
             margin: auto;
             text-align: center
         }
 
         input {
-            padding: 12px;
             width: 100%;
-            margin-bottom: 15px;
+            padding: 12px;
             border: 1px solid #ddd;
-            border-radius: 6px
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 16px;
         }
 
         button {
@@ -70,18 +77,34 @@
             border: none;
             border-radius: 6px;
             cursor: pointer;
-            margin-bottom: 10px;
-            width: 100%
+            margin-right: 10px
         }
 
         .clear-btn {
             background: #6b7280
         }
 
-        .result {
-            margin-top: 15px;
+        .result-box {
+            margin-top: 25px;
+            text-align: left;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .result-box p {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        .highlight {
             font-weight: 600;
-            white-space: pre-line
+            color: #2563eb;
+        }
+
+        canvas {
+            margin-top: 30px;
         }
 
         footer {
@@ -98,17 +121,15 @@
 
     <header>
 
-        <a href="./index.html">
-            <img src="img/ConvoTools-s.png" style="width:150px">
+        <a class="logo" href="./index.html">
+            <img src="img/ConvoTools-s.png" alt="ConvoTools">
         </a>
 
         <nav>
             <a href="./index.html">Home</a>
-            <!-- <a href="https://www.buymeacoffee.com/convotools" target="_blank">Buy me a coffee</a> -->
         </nav>
 
     </header>
-
 
     <section class="converter">
 
@@ -116,96 +137,128 @@
 
         <div class="convert-box">
 
-            <label style="display:block;margin-bottom:6px;font-weight:500">
-                Loan Amount (₹)
-            </label>
-            <input type="number" id="loanAmount" placeholder="Enter loan amount">
-
-            <label style="display:block;margin-bottom:6px;font-weight:500">
-                Interest Rate (% per year)
-            </label>
-            <input type="number" id="interestRate" placeholder="Enter interest rate">
-
-            <label style="display:block;margin-bottom:6px;font-weight:500">
-                Loan Tenure (Years)
-            </label>
-            <input type="number" id="loanTenure" placeholder="Enter loan tenure">
+            <input type="number" id="amount" placeholder="Loan Amount (₹)" />
+            <input type="number" id="rate" placeholder="Interest Rate (% per year)" />
+            <input type="number" id="tenure" placeholder="Tenure (Months)" />
 
             <button onclick="calculateEMI()">
                 <i class="fa-solid fa-calculator"></i> Calculate EMI
             </button>
 
-            <button onclick="clearEMI()" class="clear-btn">
+            <button onclick="clearFields()" class="clear-btn">
                 Clear
             </button>
 
-            <div class="result" id="emiResult"></div>
+            <div id="result" class="result-box" style="display:none;"></div>
+
+            <!-- <canvas id="emiChart" style="display:none;"></canvas> -->
+
+            <br><br>
+
+            <!-- SEO CONTENT -->
+            <div style="text-align: left;">
+
+                <p><b>✅ What is EMI Calculator?</b></p><br>
+
+                <p>An EMI Calculator helps you calculate your monthly loan payment (EMI), total interest payable, and
+                    total amount payable based on loan details.</p><br>
+
+                <p><b>✅ How to Use EMI Calculator?</b></p><br>
+
+                <p>> Enter loan amount</p><br>
+                <p>> Enter interest rate</p><br>
+                <p>> Enter tenure</p><br>
+                <p>> Click Calculate EMI</p><br>
+
+                <p><b>✅ Features</b></p><br>
+
+                <p>⚡ Instant EMI calculation</p><br>
+                <p>💰 Shows interest & principal breakup</p><br>
+                <p>📊 Visual pie chart</p><br>
+                <p>💯 Free to use</p><br>
+
+            </div>
 
         </div>
 
     </section>
 
-
     <footer>
         <p>© 2026 ConvoTools. All rights reserved.</p>
     </footer>
 
-
     <script>
 
-    const endpoint = "https://script.google.com/macros/s/AKfycbzKGNNlKFnxO9qZ7tZ2n4kjxsJBSANnaolmsYDu6UUYYWXBVUl_RQSC2Na8r0Q6HXTUTw/exec";
-
-    const payload = {
-      page: document.title || "landing",
-      tool: "convotools_homepage",
-      userAgent: navigator.userAgent,
-      referrer: document.referrer,
-      screen: screen.width + "x" + screen.height,
-      timestamp: new Date().toISOString()
-    };
-
-    fetch(endpoint, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
+        let chart;
 
         function calculateEMI() {
 
-            let P = parseFloat(document.getElementById("loanAmount").value)
-            let annualRate = parseFloat(document.getElementById("interestRate").value)
-            let years = parseFloat(document.getElementById("loanTenure").value)
+            const P = parseFloat(document.getElementById("amount").value);
+            const annualRate = parseFloat(document.getElementById("rate").value);
+            const N = parseFloat(document.getElementById("tenure").value);
 
-            if (!P || !annualRate || !years) {
-                alert("Please fill all fields")
-                return
+            if (!P || !annualRate || !N) {
+                alert("Please fill all fields");
+                return;
             }
 
-            let r = annualRate / 12 / 100
-            let n = years * 12
+            const R = annualRate / 12 / 100;
 
-            let emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1)
+            const EMI = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
 
-            let totalPayment = emi * n
-            let totalInterest = totalPayment - P
+            const totalPayment = EMI * N;
+            const totalInterest = totalPayment - P;
 
-            let result =
-                `Monthly EMI: ₹${emi.toFixed(2)}
-Total Payment: ₹${totalPayment.toFixed(2)}
-Total Interest: ₹${totalInterest.toFixed(2)}`
+            document.getElementById("result").style.display = "block";
 
-            document.getElementById("emiResult").innerText = result
+            document.getElementById("result").innerHTML = `
+        <p><b>Monthly EMI:</b> <span class="highlight">₹${EMI.toFixed(2)}</span></p>
+        <p><b>Total Interest Payable:</b> ₹${totalInterest.toFixed(2)}</p>
+        <p><b>Total Payment:</b> ₹${totalPayment.toFixed(2)}</p>
+        <hr style="margin:15px 0;">
+        <p><b>Principal:</b> ₹${P}</p>
+        <p><b>Interest:</b> ₹${totalInterest.toFixed(2)}</p>
+    `;
 
+            const ctx = document.getElementById('emiChart');
+            ctx.style.display = "block";
+
+            if (chart) {
+                chart.destroy();
+            }
+
+            chart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Principal', 'Interest'],
+                    datasets: [{
+                        data: [P, totalInterest],
+                        backgroundColor: ['#2563eb', '#f59e0b']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
         }
 
-        function clearEMI() {
+        function clearFields() {
+            document.getElementById("amount").value = "";
+            document.getElementById("rate").value = "";
+            document.getElementById("tenure").value = "";
+            document.getElementById("result").style.display = "none";
 
-            document.getElementById("loanAmount").value = ""
-            document.getElementById("interestRate").value = ""
-            document.getElementById("loanTenure").value = ""
-            document.getElementById("emiResult").innerText = ""
+            const chartCanvas = document.getElementById("emiChart");
+            chartCanvas.style.display = "none";
 
+            if (chart) {
+                chart.destroy();
+            }
         }
 
     </script>

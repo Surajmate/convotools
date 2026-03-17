@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ConvoTools - JSON Beautifier</title>
+    <title>ConvoTools - JSON Beautifier/Formatter</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -114,14 +114,19 @@
 
     <section class="converter">
 
-        <h2>JSON Beautifier</h2>
+        <h2>JSON Beautifier / Formatter</h2>
 
         <div class="convert-box">
 
             <textarea id="input" placeholder="Paste minified JSON here..."></textarea>
 
             <button onclick="beautifyJSON()">
-                <i class="fa-solid fa-wand-magic-sparkles"></i> Beautify JSON
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Beautify/Format JSON
+            </button>
+
+            <button onclick="copyData()" id="copyBtn" style="display: none;">
+                <i class="fa-solid fa-copy"></i>
+                Copy Output
             </button>
 
             <button onclick="clearData()" class="clear-btn">
@@ -133,6 +138,48 @@
 
             <textarea id="output" placeholder="Beautified JSON will appear here..." readonly></textarea>
 
+            <div style="text-align: left;">
+                <p><b>✅ What is JSON Formatter?</b></p><br>
+
+                <p>A JSON Formatter is an online tool that helps you beautify, format, and validate JSON data in a
+                    readable
+                    structure. It converts messy JSON into clean, structured code, making it easier for developers to
+                    debug and
+                    analyze data.</p><br>
+
+                <p><b>✅ How to Use JSON Formatter?</b></p><br>
+
+                <p>> Paste your JSON data into the input box</p><br>
+
+                <p>> Click on the Beautify button</p><br>
+
+                <p>> Instantly view structured JSON</p><br>
+
+                <p>> Copy the formatted output</p><br>
+
+                <p><b>✅ Features</b></p><br>
+
+                <p>⚡ Instant formatting</p><br>
+
+                <p>🔍 JSON validation</p><br>
+
+                <p>🔐 Secure (no data stored)</p><br>
+
+                <p>📋 One-click copy</p><br>
+
+                <p>💯 Free to use</p><br>
+
+                <p><b>✅ FAQs</b></p><br>
+
+                <p><b>Q1.</b> Is this JSON Formatter free?</p>
+                <p> - Yes, it is completely free to use.</p><br>
+
+                <p><b>Q2.</b> Is my data सुरक्षित?</p>
+                <p> - Yes, all processing happens in your browser. No data is stored.</p><br>
+
+                <p><b>Q3.</b> Can I format large JSON files?</p>
+                <p> - Yes, but performance depends on your browser.</p>
+            </div>
         </div>
 
     </section>
@@ -143,23 +190,23 @@
 
     <script>
 
-    const endpoint = "https://script.google.com/macros/s/AKfycbzKGNNlKFnxO9qZ7tZ2n4kjxsJBSANnaolmsYDu6UUYYWXBVUl_RQSC2Na8r0Q6HXTUTw/exec";
+        const endpoint = "https://script.google.com/macros/s/AKfycbzKGNNlKFnxO9qZ7tZ2n4kjxsJBSANnaolmsYDu6UUYYWXBVUl_RQSC2Na8r0Q6HXTUTw/exec";
 
-    const payload = {
-      page: document.title || "landing",
-      tool: "convotools_homepage",
-      userAgent: navigator.userAgent,
-      referrer: document.referrer,
-      screen: screen.width + "x" + screen.height,
-      timestamp: new Date().toISOString()
-    };
+        const payload = {
+            page: document.title || "landing",
+            tool: "convotools_homepage",
+            userAgent: navigator.userAgent,
+            referrer: document.referrer,
+            screen: screen.width + "x" + screen.height,
+            timestamp: new Date().toISOString()
+        };
 
-    fetch(endpoint, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
+        fetch(endpoint, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
 
         function beautifyJSON() {
 
@@ -171,6 +218,8 @@
 
                 document.getElementById("output").value =
                     JSON.stringify(json, null, 2)
+
+                document.getElementById("copyBtn").style.display = "inline-block"
 
             } catch (e) {
 
@@ -184,6 +233,20 @@
 
             document.getElementById("input").value = ""
             document.getElementById("output").value = ""
+            document.getElementById("copyBtn").style.display = "none"
+
+        }
+
+        function copyData() {
+
+            const output = document.getElementById("output").value
+
+            if (output) {
+                navigator.clipboard.writeText(output)
+                alert("Output copied to clipboard!")
+            } else {
+                alert("No output to copy!")
+            }
 
         }
 
