@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ConvoTools - AES Encrypt / Decrypt Tool</title>
+
+    <link rel="icon" type="image/x-icon" href="img/ConvoTools-f.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Poppins, sans-serif
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #333
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05)
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2563eb
+        }
+
+        nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: #444;
+            font-weight: 500
+        }
+
+        .converter {
+            padding: 70px 8%;
+        }
+
+        .converter h2 {
+            text-align: center;
+            margin-bottom: 30px
+        }
+
+        .convert-box {
+            max-width: 900px;
+            margin: auto;
+            text-align: center
+        }
+
+        textarea {
+            width: 100%;
+            height: 320px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            resize: none;
+            font-family: monospace;
+            margin-bottom: 15px
+        }
+
+        button {
+            padding: 12px 25px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-right: 10px
+        }
+
+        .clear-btn {
+            background: #6b7280
+        }
+
+        footer {
+            background: #111;
+            color: #aaa;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a class="logo" href="./index.html">
+            <img src="img/ConvoTools-s.png" alt="ConvoTools" style="width:150px;">
+        </a>
+        <nav>
+            <a href="./index.html">Home</a>
+            <!-- <a href="https://www.buymeacoffee.com/convotools" target="_blank">
+                Buy me a coffee
+            </a> -->
+        </nav>
+    </header>
+
+
+    <section class="converter">
+
+        <h2>AES-256-CBC Encrypt / Decrypt</h2>
+
+        <div class="convert-box">
+    
+            <input type="text" id="key" placeholder="Enter Secret Key">
+    
+            <h3>Input</h3>
+            <textarea id="input" placeholder="Enter text or JSON..."></textarea>
+    
+            <h3>Output</h3>
+            <textarea id="output" placeholder="Result will appear here..."></textarea>
+    
+            <button onclick="encrypt()">Encrypt</button>
+            <button onclick="decrypt()">Decrypt</button>
+            <button onclick="copyOutput()">Copy</button>
+            <button onclick="clearAll()">Clear</button>
+    
+        </div>
+    </section>
+
+
+    <script>
+        function generateKey(key, salt) {
+            return CryptoJS.PBKDF2(key, salt, {
+                keySize: 256 / 32,
+                iterations: 65536
+            });
+        }
+
+        function encrypt() {
+            try {
+                const text = document.getElementById("input").value;
+                const key = document.getElementById("key").value;
+
+                const salt = CryptoJS.lib.WordArray.random(16);
+                const iv = CryptoJS.lib.WordArray.random(16);
+
+                const derivedKey = generateKey(key, salt);
+
+                const encrypted = CryptoJS.AES.encrypt(text, derivedKey, {
+                    iv: iv,
+                    padding: CryptoJS.pad.Pkcs7,
+                    mode: CryptoJS.mode.CBC
+                });
+
+                const finalData = salt.concat(iv).concat(encrypted.ciphertext);
+                const base64 = CryptoJS.enc.Base64.stringify(finalData);
+
+                document.getElementById("output").value = base64;
+
+            } catch (e) {
+                alert("Encryption Error");
+            }
+        }
+
+        function decrypt() {
+            try {
+                const encText = document.getElementById("input").value;
+                const key = document.getElementById("key").value;
+
+                const data = CryptoJS.enc.Base64.parse(encText);
+
+                const salt = CryptoJS.lib.WordArray.create(data.words.slice(0, 4));
+                const iv = CryptoJS.lib.WordArray.create(data.words.slice(4, 8));
+                const ciphertext = CryptoJS.lib.WordArray.create(data.words.slice(8));
+
+                const derivedKey = generateKey(key, salt);
+
+                const decrypted = CryptoJS.AES.decrypt(
+                    { ciphertext: ciphertext },
+                    derivedKey,
+                    {
+                        iv: iv,
+                        padding: CryptoJS.pad.Pkcs7,
+                        mode: CryptoJS.mode.CBC
+                    }
+                );
+
+                const result = decrypted.toString(CryptoJS.enc.Utf8);
+
+                document.getElementById("output").value = result;
+
+            } catch (e) {
+                alert("Decryption Error");
+            }
+        }
+
+        function copyOutput() {
+            const output = document.getElementById("output");
+            output.select();
+            document.execCommand("copy");
+            alert("Copied!");
+        }
+
+        function clearAll() {
+            document.getElementById("input").value = "";
+            document.getElementById("output").value = "";
+        }
+    </script>
+
+</body>
+
+</html>
