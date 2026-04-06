@@ -1,159 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convotools - Payment QR Generator</title>
+
+    <title>ConvoTools - Payment QR Code Generator</title>
+
+    <link rel="icon" type="image/x-icon" href="img/ConvoTools-f.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-        textarea {
-            width: 100%;
-            min-height: 180px;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 14px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            resize: vertical;
-            background: #f7f8fc;
-            color: #333;
+            font-family: Poppins, sans-serif
         }
 
-        .output {
-            margin-top: 20px;
-            padding: 20px;
-            background: #f5f7ff;
-            border: 1px solid #e3e7ff;
-            border-radius: 8px;
-            min-height: 180px;
-            font-family: 'Courier New', Courier, monospace;
-            white-space: pre-wrap;
-            word-break: break-word;
-            overflow: auto;
-        }
-
-        .actions {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-
-        button.secondary {
-            width: auto;
-            flex: 1;
-            background: #edf2ff;
-            color: #4a5baf;
-            border: 1px solid #c1c7f0;
-        }
-
-        button.secondary:hover {
-            background: #dbe2ff;
-        }
-        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            background: #f5f7fb;
+            color: #333
+        }
+
+        header {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
+            padding: 20px 8%;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 40px;
-            max-width: 500px;
-            width: 100%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05)
         }
-        
-        h1 {
-            color: #333;
-            margin-bottom: 30px;
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2563eb
+        }
+
+        nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: #444;
+            font-weight: 500
+        }
+
+        .converter {
+            padding: 46.6px 8%;
+        }
+
+        .converter h2 {
             text-align: center;
         }
-        
-        .form-group {
-            margin-bottom: 20px;
+
+        .tool-box {
+            max-width: 1000px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px
         }
-        
-        label {
-            display: block;
-            color: #555;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-        
-        input, select {
+
+        textarea {
             width: 100%;
+            height: 320px;
             padding: 12px;
             border: 1px solid #ddd;
             border-radius: 6px;
-            font-size: 14px;
+            resize: none;
+            font-family: monospace
         }
-        
+
+        .button-area {
+            grid-column: span 2;
+            text-align: center
+        }
+
         button {
-            width: 100%;
-            padding: 12px;
-            background: #667eea;
+            padding: 12px 25px;
+            background: #2563eb;
             color: white;
             border: none;
             border-radius: 6px;
-            font-weight: 600;
             cursor: pointer;
-            margin-top: 20px;
+            font-size: 15px
         }
-        
-        button:hover {
-            background: #5568d3;
-        }
-        
-        #qrCode {
+
+        footer {
+            background: #111;
+            color: #aaa;
             text-align: center;
-            margin-top: 30px;
+            padding: 30px;
+        }
+
+        @media(max-width:768px) {
+
+            .tool-box {
+                grid-template-columns: 1fr
+            }
+
+            .button-area {
+                grid-column: span 1
+            }
+
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Payment QR Generator</h1>
-        
-        <div class="form-group">
-            <label for="amount">Amount</label>
-            <input type="number" id="amount" placeholder="Enter amount" step="0.01">
+
+    <header>
+
+        <a class="logo" href="./index.html">
+            <img src="img/ConvoTools-s.png" alt="ConvoTools" style="width:150px;">
+        </a>
+
+        <nav>
+            <a href="./index.html">Home</a>
+            <!-- <a href="https://www.buymeacoffee.com/convotools" target="_blank">
+                Buy me a coffee
+            </a> -->
+        </nav>
+
+    </header>
+
+    <section class="converter">
+
+        <h2>Payment QR Generator</h2>
+
+        <div class="convert-box">
+
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number" id="amount" placeholder="Enter amount" step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="upiId">UPI ID</label>
+                <input type="text" id="upiId" placeholder="user@upi">
+            </div>
+
+            <button onclick="generateQR()">Generate QR Code</button>
+            <div id="qrCode"></div>
         </div>
-        
-        <div class="form-group">
-            <label for="upiId">UPI ID</label>
-            <input type="text" id="upiId" placeholder="user@upi">
-        </div>
-        
-        <button onclick="generateQR()">Generate QR Code</button>
-        <div id="qrCode"></div>
-    </div>
-    
+
+    </section>
+
+    <footer>
+        <p>© 2026 ConvoTools. All rights reserved.</p>
+    </footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script>
         function generateQR() {
             const amount = document.getElementById('amount').value;
             const upiId = document.getElementById('upiId').value;
-            
+
             if (!amount || !upiId) {
                 alert('Please fill all fields');
                 return;
             }
-            
+
             const upiString = `upi://pay?pa=${upiId}&am=${amount}`;
             const qrDiv = document.getElementById('qrCode');
             qrDiv.innerHTML = '';
-            
+
             new QRCode(qrDiv, {
                 text: upiString,
                 width: 256,
@@ -162,4 +176,5 @@
         }
     </script>
 </body>
+
 </html>
