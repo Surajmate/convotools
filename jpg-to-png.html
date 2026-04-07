@@ -7,7 +7,7 @@
 
     <title>ConvoTools - JPG to PNG</title>
 
-    <link rel="icon" type="image/x-icon" href="img/ConvoTools.in.png">
+    <link rel="icon" type="image/x-icon" href="img/ConvoTools-head.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -131,7 +131,7 @@
     <header>
 
         <a class="logo" href="./index.html">
-            <img src="img/convoTools.gif" alt="ConvoTools" style="width: 150px; border-radius: 5px;">
+            <img src="img/convoTools-g.png" alt="ConvoTools" style="width: 150px;">
         </a>
 
         <nav>
@@ -185,23 +185,23 @@
 
     <script>
 
-    const endpoint = "https://script.google.com/macros/s/AKfycbzKGNNlKFnxO9qZ7tZ2n4kjxsJBSANnaolmsYDu6UUYYWXBVUl_RQSC2Na8r0Q6HXTUTw/exec";
+        const endpoint = "https://script.google.com/macros/s/AKfycbzKGNNlKFnxO9qZ7tZ2n4kjxsJBSANnaolmsYDu6UUYYWXBVUl_RQSC2Na8r0Q6HXTUTw/exec";
 
-    const payload = {
-      page: document.title || "landing",
-      tool: "convotools_homepage",
-      userAgent: navigator.userAgent,
-      referrer: document.referrer,
-      screen: screen.width + "x" + screen.height,
-      timestamp: new Date().toISOString()
-    };
+        const payload = {
+            page: document.title || "landing",
+            tool: "convotools_homepage",
+            userAgent: navigator.userAgent,
+            referrer: document.referrer,
+            screen: screen.width + "x" + screen.height,
+            timestamp: new Date().toISOString()
+        };
 
-    fetch(endpoint, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
+        fetch(endpoint, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
 
         function convertJpgToPng() {
 
@@ -213,6 +213,12 @@
 
             if (!file) {
                 alert("Please upload a JPG image")
+                // Swal.fire({
+                //     title: 'Opps!',
+                //     icon: 'error',
+                //     html: 'Please upload a JPG image',
+                //     showCloseButton: true,
+                // })
                 return
             }
 
@@ -267,6 +273,7 @@
         }
 
     </script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 
 </body>
 
