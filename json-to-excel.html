@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ConvoTools - JSON to Excel</title>
 
-    <link rel="icon" type="image/x-icon" href="img/ConvoTools-head.png">
+  <link rel="icon" type="image/x-icon" href="img/ConvoTools-head.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -204,7 +204,7 @@
     <div class="convert-box" style="max-width:600px;">
 
       <label style="display:block;margin-bottom:6px;font-weight:500;">Select JSON File</label>
-      <input type="file" id="jsonFileInput" style="background: white" accept=".json" />
+      <input type="file" id="jsonFileInput" style="background:white" accept=".json" multiple/>
 
       <label style="display:block;margin-top:10px;margin-bottom:6px;font-weight:500">Excel File Name</label>
       <input type="text" id="excelFileName" placeholder="Enter File Name" />
@@ -242,35 +242,99 @@
     });
 
     function convertJSONtoExcel(jsonData, fileName) {
-      var ws = XLSX.utils.json_to_sheet(jsonData)
-      var wb = XLSX.utils.book_new()
-      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1')
-      XLSX.writeFile(wb, fileName + '.xlsx')
+
+      // Get all unique keys
+      const headers = [];
+
+      jsonData.forEach(obj => {
+        Object.keys(obj).forEach(key => {
+          if (!headers.includes(key)) {
+            headers.push(key);
+          }
+        });
+      });
+
+      // Normalize records
+      const normalizedData = jsonData.map(item => {
+
+        const row = {};
+
+        headers.forEach(key => {
+
+          let value = item[key];
+
+          if (typeof value === "object" && value !== null) {
+            value = JSON.stringify(value);
+          }
+
+          row[key] = value ?? "";
+
+        });
+
+        return row;
+
+      });
+
+      const ws = XLSX.utils.json_to_sheet(normalizedData);
+
+      const wb = XLSX.utils.book_new();
+
+      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+      XLSX.writeFile(wb, fileName + ".xlsx");
+
     }
 
-    function handleFile() {
-      var input = document.getElementById('jsonFileInput')
-      var file = input.files[0]
-      var excelFileName = document.getElementById('excelFileName').value || 'output'
+    async function handleFile() {
 
-      if (file) {
-        var reader = new FileReader()
+      const input = document.getElementById("jsonFileInput");
+      const files = input.files;
 
-        reader.onload = function (e) {
-          try {
-            var jsonData = JSON.parse(e.target.result)
-            convertJSONtoExcel(jsonData, excelFileName)
-            document.getElementById('result').innerText = 'Excel file downloaded successfully.'
-          } catch (error) {
-            console.error('Error parsing JSON file:', error)
-            alert('Error parsing JSON file. Please check the file format.')
+      const excelFileName =
+        document.getElementById("excelFileName").value || "output";
+
+      if (files.length === 0) {
+        alert("Please select one or more JSON files.");
+        return;
+      }
+
+      let mergedData = [];
+
+      try {
+
+        for (const file of files) {
+
+          const text = await file.text();
+          let json = JSON.parse(text);
+
+          // If file contains an array
+          if (Array.isArray(json)) {
+            mergedData.push(...json);
           }
+
+          // If file contains a single object
+          else if (typeof json === "object") {
+            mergedData.push(json);
+          }
+
         }
 
-        reader.readAsText(file)
-      } else {
-        alert('Please select a JSON file.')
+        if (mergedData.length === 0) {
+          alert("No records found.");
+          return;
+        }
+
+        convertJSONtoExcel(mergedData, excelFileName);
+
+        document.getElementById("result").innerText =
+          `${mergedData.length} records from ${files.length} file(s) exported successfully.`;
+
       }
+      catch (error) {
+        console.error(error);
+        alert("One or more JSON files are invalid.");
+      }
+
     }
 
   </script>
