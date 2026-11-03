@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Converter Directory | ConvoTools</title>
+  <meta name="description" content="Browse ConvoTools converters by category. Convert data, documents, images, media, and e-book formats in one organized directory.">
+  <link rel="canonical" href="https://convotools.in/converters.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Converter Directory | ConvoTools">
+  <meta property="og:description" content="Find converters by category in the ConvoTools directory.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/tailwind.css">
+  <link rel="stylesheet" href="css/rich-design.css">
+</head>
+<body class="converter-directory-page min-h-screen text-slate-800 antialiased">
+  <header class="flex items-center justify-between gap-4">
+    <a class="logo" href="./index.html"><img src="img/convotools.gif" alt="ConvoTools" style="width: 150px;"></a>
+    <nav class="flex items-center gap-2" aria-label="Main navigation">
+      <a href="./index.html">Home</a>
+      <a href="#converterDirectory">Converters</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="directory-hero">
+      <div class="directory-hero-inner">
+        <p class="eyebrow"><span class="hero-status-dot"></span> The ConvoTools library</p>
+        <h1>Every format has<br><span>a way forward.</span></h1>
+        <p>Explore 225 converters, organized around the work you need to do. Find your format, choose a tool, and get moving.</p>
+        <div class="directory-hero-stats" aria-label="Directory highlights">
+          <span><strong>225</strong> converters</span>
+          <span><strong>6</strong> focused categories</span>
+          <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Private by design</span>
+        </div>
+      </div>
+      <label class="tool-search directory-search">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <input id="converterSearch" type="search" placeholder="Search formats (e.g. JSON to CSV)" aria-label="Search converters">
+        <span class="search-shortcut" aria-hidden="true">⌕</span>
+      </label>
+    </section>
+
+    <section class="directory-content" id="converterDirectory" aria-label="Converter categories">
+      <div class="directory-toolbar">
+        <div>
+          <span class="section-kicker">Browse the collection</span>
+          <p class="tool-results-count" id="converterResultCount" aria-live="polite"></p>
+        </div>
+        <div class="directory-categories" id="converterCategoryNav" role="group" aria-label="Filter converter categories"></div>
+      </div>
+      <div class="directory-results-surface" id="converterCategories"></div>
+      <p class="tool-empty-state" id="converterEmptyState" hidden>No converters match that search. Try another format or category.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 ConvoTools. All rights reserved.</p>
+    <p>Need additional tools or updates? Email us at <a href="mailto:support@codelaunchtechnologies.com">support@codelaunchtechnologies.com</a>.</p>
+    <a class="site-footer-brand" href="https://www.codelaunchtechnologies.com/" target="_blank" rel="noopener noreferrer">
+      <img src="img/codelaunch-logo.png" alt="CodeLaunch Technologies logo">
+      <span>Powered by CodeLaunch</span>
+    </a>
+  </footer>
+
+  <script src="js/converter-catalog.js"></script>
+  <script src="js/converter-directory.js"></script>
+</body>
+</html>

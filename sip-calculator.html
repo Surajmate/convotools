@@ -3,7 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>ConvoTools - SIP Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIP Calculator - Estimate Mutual Fund Returns | ConvoTools</title>
+    <meta name="description" content="Estimate the future value of monthly mutual fund investments with this free SIP calculator. Enter your investment, duration, and expected return.">
+    <link rel="canonical" href="https://convotools.in/sip-calculator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ConvoTools">
+    <meta property="og:title" content="SIP Calculator - Estimate Mutual Fund Returns | ConvoTools">
+    <meta property="og:description" content="Estimate the future value of monthly mutual fund investments with this free SIP calculator.">
+    <meta property="og:url" content="https://convotools.in/sip-calculator.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="SIP Calculator - Estimate Mutual Fund Returns | ConvoTools">
+    <meta name="twitter:description" content="Estimate the future value of monthly mutual fund investments with this free SIP calculator.">
 
     <link rel="icon" type="image/x-icon" href="img/ConvoTools-head.png">
 
@@ -110,18 +121,21 @@
 
     gtag('config', 'AW-11442578018');
   </script>
+<link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/rich-design.css">
 </head>
 
-<body>
+<body class="min-h-screen text-slate-800 antialiased">
 
-    <header>
+    <header class="flex items-center justify-between gap-4">
 
     <a class="logo" href="./index.html">
       <img src="img/convotools.gif" alt="ConvoTools" style="width: 150px;">
     </a>
 
-    <nav>
+    <nav class="flex items-center gap-2">
       <a href="./index.html">Home</a>
+      <a href="./converters.html">Converters</a>
       <!-- <a href="https://www.buymeacoffee.com/convotools" target="_blank">
         Buy me a coffee
       </a> -->
@@ -129,10 +143,10 @@
 
   </header>
 
-    <section class="converter">
+    <section class="converter mx-auto w-full max-w-6xl px-5 py-16">
         <h2>SIP Calculator</h2>
 
-        <div class="convert-box">
+        <div class="convert-box mx-auto w-full rounded-3xl border border-slate-200 bg-white p-8 shadow-xl">
 
             <input type="number" id="amount" placeholder="Monthly Investment (₹)">
             <input type="number" id="rate" placeholder="Expected Return (%)">
@@ -150,8 +164,14 @@
         </div>
     </section>
 
-    <footer>
+    <footer class="site-footer">
         <p>© 2026 ConvoTools</p>
+
+    <p>Need additional tools or updates? Email us at <a href="mailto:support@codelaunchtechnologies.com">support@codelaunchtechnologies.com</a>.</p>
+    <a class="site-footer-brand" href="https://www.codelaunchtechnologies.com/" target="_blank" rel="noopener noreferrer">
+      <img src="img/codelaunch-logo.png" alt="CodeLaunch Technologies logo">
+      <span>Powered by CodeLaunch</span>
+    </a>
     </footer>
 
     <script>

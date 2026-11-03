@@ -4,7 +4,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ConvoTools - Free Online Conversion Tools</title>
+  <title>Free Online Tools for JSON, QR Codes &amp; More | ConvoTools</title>
+  <meta name="description" content="Use free online tools for JSON, file conversion, QR codes, calculators, and everyday text utilities. Fast, simple tools from ConvoTools.">
+  <link rel="canonical" href="https://convotools.in/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ConvoTools">
+  <meta property="og:title" content="Free Online Tools for JSON, QR Codes &amp; More | ConvoTools">
+  <meta property="og:description" content="Use free online tools for JSON, file conversion, QR codes, calculators, and everyday text utilities.">
+  <meta property="og:url" content="https://convotools.in/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Online Tools for JSON, QR Codes &amp; More | ConvoTools">
+  <meta name="twitter:description" content="Use free online tools for JSON, file conversion, QR codes, calculators, and everyday text utilities.">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "ConvoTools",
+      "url": "https://convotools.in/",
+      "description": "Free online tools for JSON, file conversion, QR codes, calculators, and everyday text utilities."
+    }
+  </script>
 
   <link rel="icon" type="image/x-icon" href="img/ConvoTools-head.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -211,17 +230,20 @@
       background-color: #333;
     }
   </style>
+<link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/rich-design.css">
 </head>
 
-<body>
-  <header>
+<body class="home-page min-h-screen text-slate-800 antialiased">
+  <header class="flex items-center justify-between gap-4">
 
     <a class="logo" href="./index.html">
       <img src="img/convotools.gif" alt="ConvoTools" style="width: 150px;">
     </a>
 
-    <nav>
+    <nav class="flex items-center gap-2">
       <a href="#tools">Tools</a>
+      <a href="./converters.html">Converters</a>
       <a href="#features">Features</a>
       <a href="https://www.buymeacoffee.com/convotools" target="_blank">
         Support Us
@@ -230,203 +252,297 @@
 
   </header>
 
-  <section class="hero">
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1>All Your Conversion Tools in One Place</h1>
-    <p>Fast, accurate and free online conversion tools for everyday calculations.</p>
-    <button onclick="document.getElementById('tools').scrollIntoView()">Explore Tools</button>
-  </section>
-
-  <section class="tools" id="tools">
-    <h2>Popular Conversion Tools</h2>
-    <div class="grid">
-
-      <a class="card" href="./json-stringify.html" style="text-decoration:none;color:inherit;display:block">
-        <i class="fa-solid fa-code"></i>
-        <h3>JSON Stringify</h3>
-        <p>Convert formatted JSON objects into a single escaped string for APIs and payloads.</p>
-      </a>
-
-      <a class="card" href="./json-unstringify.html" style="text-decoration:none;color:inherit;display:block">
-        <i class="fa-solid fa-code-branch"></i>
-        <h3>JSON Unstringify</h3>
-        <p>Convert escaped JSON strings back into readable JSON format instantly.</p>
-      </a>
-
-      <a class="card" href="./json-to-excel.html" style="text-decoration:none;color:inherit;display:block">
-        <i class="fa-solid fa-file-excel"></i>
-        <h3>JSON File to Excel</h3>
-        <p>Convert JSON data into structured Excel sheets for easy analysis.</p>
-      </a>
-
-      <a class="card" href="./excel-to-json.html" style="text-decoration:none;color:inherit;display:block">
-        <i class="fa-solid fa-table"></i>
-        <h3>Excel to JSON</h3>
-        <p>Transform Excel spreadsheets into JSON format for APIs and applications.</p>
-      </a>
-
-      <a class="card" href="./json-to-table.html" style="text-decoration:none;color:inherit;display:block">
-        <i class="fa-solid fa-table"></i>
-        <h3>JSON to Table</h3>
-        <p>Transform JSON data into a tabular format for easy viewing and analysis.</p>
-      </a>
-
-      <a class="card" href="./text-to-one-line.html" style="text-decoration:none;color:inherit;display:block">
-        <i class="fa-solid fa-lines-leaning"></i>
-        <h3>Text to One Line</h3>
-        <p>Transform multi-line text into a single line for logs, scripts, and payloads.</p>
-      </a>
-
-      <a class="card" href="./json-beautifier.html" style="text-decoration:none;color:inherit;display:block">
-        <i class="fa-solid fa-file-code"></i>
-        <h3>JSON Beautifier</h3>
-        <p>Format and beautify JSON data for better readability.</p>
-      </a>
-
-      <a class="card" href="./jpg-to-png.html" style="text-decoration:none;color:inherit;display:block">
-        <i class="fa-solid fa-file-image"></i>
-        <h3>JPG to PNG</h3>
-        <p>Convert JPG images to PNG format.</p>
-      </a>
-
-      <a class="card" href="./base64-encode-decode.html" style="text-decoration:none;color:inherit;display:block">
-        <i class="fa-solid fa-lock"></i>
-        <h3>Base64 Encoder / Decoder</h3>
-        <p>Encode and decode Base64 strings.</p>
-      </a>
-
-      <a class="card" href="./image-compressor.html" style="text-decoration:none;color:inherit;display:block">
-        <i class="fa-solid fa-compress"></i>
-        <h3>Image Compressor</h3>
-        <p>Compress images to reduce file size.</p>
-      </a>
-      <!-- href="./payment-qr-generator.html" -->
-      <a class="card" href="#" style="text-decoration:none;color:inherit;display:block;pointer-events:none;opacity:0.6">
-        <i class="fa-solid fa-qrcode"></i>
-        <h3>Payment QR Generator</h3>
-        <p>Generate QR codes for payment links.</p>
-      </a>
-
-      <a class="card" href="#" style="text-decoration:none;color:inherit;display:block;pointer-events:none;opacity:0.6">
-        <i class="fa-solid fa-lock"></i>
-        <h3>AES Encrypt/Decrypt - Coming Soon</h3>
-        <p>Encrypt and decrypt data using AES-256-CBC.</p>
-      </a>
-
-      <a class="card disabled" href="#"
-        style="text-decoration:none;color:inherit;display:block;pointer-events:none;opacity:0.6">
-        <i class="fa-solid fa-file-code"></i>
-        <h3>JSON to XML - Coming Soon</h3>
-        <p>Convert JSON data to XML format.</p>
-      </a>
-
-      <a class="card disabled" href="#"
-        style="text-decoration:none;color:inherit;display:block;pointer-events:none;opacity:0.6">
-        <i class="fa-solid fa-file-code"></i>
-        <h3>XML to JSON - Coming Soon</h3>
-        <p>Convert XML data to JSON format.</p>
-      </a>
-
-      <a class="card disabled" href="#"
-        style="text-decoration:none;color:inherit;display:block;pointer-events:none;opacity:0.6">
-        <i class="fa-solid fa-calculator"></i>
-        <h3>EMI Calculator - Coming Soon</h3>
-        <p>Calculate your monthly EMI payments.</p>
-      </a>
-
-      <a class="card disabled" href="#"
-        style="text-decoration:none;color:inherit;display:block;pointer-events:none;opacity:0.6">
-        <i class="fa-solid fa-qrcode"></i>
-        <h3>QR Code Generator - Coming Soon</h3>
-        <p>Generate QR codes for URLs, text, and more.</p>
-      </a>
-
-      <a class="card disabled" href="#"
-        style="text-decoration:none;color:inherit;display:block;pointer-events:none;opacity:0.6">
-        <i class="fa-solid fa-link"></i>
-        <h3>URL Encoder / Decoder - Coming Soon</h3>
-        <p>Encode and decode URL parameters.</p>
-      </a>
-
-      <a class="card disabled" href="#"
-        style="text-decoration:none;color:inherit;display:block;pointer-events:none;opacity:0.6">
-        <i class="fa-solid fa-id-card"></i>
-        <h3>UUID Generator - Coming Soon</h3>
-        <p>Generate unique identifiers for your applications.</p>
-      </a>
-
-      <a class="card disabled" href="#"
-        style="text-decoration:none;color:inherit;display:block;pointer-events:none;opacity:0.6">
-        <i class="fa-solid fa-calculator"></i>
-        <h3>SIP Calculator - Coming Soon</h3>
-        <p>Calculate your Systematic Investment Plan (SIP) returns.</p>
-      </a>
-
-      <a class="card disabled" href="#"
-        style="text-decoration:none;color:inherit;display:block;pointer-events:none;opacity:0.6">
-        <i class="fa-solid fa-file-csv"></i>
-        <h3>JSON to CSV - Coming Soon</h3>
-        <p>Convert JSON data to CSV format.</p>
-      </a>
-
-      <a class="card disabled" href="#"
-        style="text-decoration:none;color:inherit;display:block;pointer-events:none;opacity:0.6">
-        <i class="fa-solid fa-text-height"></i>
-        <h3>Case Converter - Coming Soon</h3>
-        <p>Convert text to different cases (upper, lower, title).</p>
-      </a>
-
-      <a class="card disabled" href="#"
-        style="text-decoration:none;color:inherit;display:block;pointer-events:none;opacity:0.6">
-        <i class="fa-solid fa-birthday-cake"></i>
-        <h3>Age Calculator - Coming Soon</h3>
-        <p>Calculate the age based on the birth date.</p>
-      </a>
-
-      <a class="card disabled" href="#"
-        style="text-decoration:none;color:inherit;display:block;pointer-events:none;opacity:0.6">
-        <i class="fa-solid fa-qrcode"></i>
-        <h3>QR Scanner - Coming Soon</h3>
-        <p>Scan QR codes using your camera.</p>
-      </a>
-
-      <a class="card disabled" href="#"
-        style="text-decoration:none;color:inherit;display:block;pointer-events:none;opacity:0.6">
-        <i class="fa-solid fa-file"></i>
-        <h3>More Coming Soon</h3>
-        <p>Stay tuned for more conversion tools being added regularly.</p>
-      </a>
-
+  <section class="hero relative isolate overflow-hidden px-6 py-24">
+    <div class="hero-layout">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="hero-status-dot"></span> A better way to get things done</p>
+        <h1><span class="hero-heading-first-line">Small tasks.</span><br><span>Handled beautifully.</span></h1>
+        <p>Thoughtful converters and everyday tools, all in one calm, simple workspace. No account. No fuss.</p>
+        <div class="hero-actions">
+          <a class="hero-primary-action" href="#tools">Explore the toolkit <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
+          <a class="hero-secondary-action" href="./converters.html">Browse 225 converters <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+        </div>
+        <div class="hero-trust-row">
+          <span><i class="fa-solid fa-lock" aria-hidden="true"></i> Private by design</span>
+          <span><i class="fa-solid fa-bolt" aria-hidden="true"></i> Ready in seconds</span>
+          <span><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> Works everywhere</span>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-orbit hero-orbit-one"></div>
+        <div class="hero-orbit hero-orbit-two"></div>
+        <div class="hero-preview-card">
+          <div class="hero-preview-top">
+            <span class="hero-preview-icon"><i class="fa-solid fa-arrow-right-arrow-left"></i></span>
+            <span class="hero-preview-menu"><i class="fa-solid fa-ellipsis"></i></span>
+          </div>
+          <span class="hero-preview-kicker">QUICK CONVERT</span>
+          <strong>JSON <span class="hero-preview-arrow">→</span> CSV</strong>
+          <div class="hero-preview-file">
+            <span class="hero-file-icon"><i class="fa-solid fa-file-code"></i></span>
+            <span><b>customer-data.json</b><small>12.4 KB · Ready to convert</small></span>
+            <i class="fa-solid fa-circle-check hero-file-check"></i>
+          </div>
+          <div class="hero-preview-progress"><span></span></div>
+          <div class="hero-preview-foot"><span>Processed locally</span><span>100%</span></div>
+        </div>
+        <div class="hero-float-chip hero-float-top"><span><i class="fa-solid fa-shield-halved"></i></span> Your files stay yours</div>
+        <div class="hero-float-chip hero-float-bottom"><span><i class="fa-solid fa-sparkles"></i></span> Simple, by design</div>
+      </div>
     </div>
   </section>
 
-  <section class="features" id="features">
-    <h2 style="text-align:center;margin-bottom:40px">Why Use ConvoTools</h2>
-    <div class="feature-grid">
-      <div class="feature"><i class="fa-solid fa-bolt"></i>
-        <h3>Instant Results</h3>
-        <p>Get real-time conversion results instantly.</p>
+  <section class="tools mx-auto w-full max-w-7xl px-6 py-16" id="tools">
+    <div class="tool-catalog-heading">
+      <div>
+        <span class="section-kicker">Find what you need</span>
+        <h2>Explore the ConvoTools toolkit</h2>
+        <p>Search across converters, calculators, and useful everyday tools.</p>
       </div>
-      <div class="feature"><i class="fa-solid fa-mobile-screen"></i>
+      <a class="tool-count-badge" href="./converters.html"><i class="fa-solid fa-sparkles" aria-hidden="true"></i> Browse 225 converters</a>
+    </div>
+    <label class="tool-search">
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      <input id="toolSearch" type="search" placeholder="Search tools (e.g. JSON to CSV, QR code)" aria-label="Search tools">
+    </label>
+    <div class="tool-filter-list" role="group" aria-label="Filter tools by category">
+      <button class="tool-filter is-active" type="button" data-category="all" aria-pressed="true">All tools</button>
+      <button class="tool-filter" type="button" data-category="data" aria-pressed="false">Data &amp; files</button>
+      <button class="tool-filter" type="button" data-category="documents" aria-pressed="false">Documents</button>
+      <button class="tool-filter" type="button" data-category="images" aria-pressed="false">Images</button>
+      <button class="tool-filter" type="button" data-category="qr" aria-pressed="false">QR codes</button>
+      <button class="tool-filter" type="button" data-category="calculators" aria-pressed="false">Calculators</button>
+      <button class="tool-filter" type="button" data-category="utilities" aria-pressed="false">Text &amp; utilities</button>
+    </div>
+    <p class="tool-results-count" id="toolResultsCount" aria-live="polite"></p>
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" id="localConverterGrid">
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="data" href="./json-stringify.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-code" aria-hidden="true"></i>
+        <h3>JSON Stringify</h3>
+        <p>Turn JSON data into a compact, escaped string.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="data" href="./json-unstringify.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-code-branch" aria-hidden="true"></i>
+        <h3>JSON Unstringify</h3>
+        <p>Decode escaped JSON strings into readable JSON.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="data" href="./json-beautifier.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-file-code" aria-hidden="true"></i>
+        <h3>JSON Formatter</h3>
+        <p>Format and beautify JSON so it is easier to inspect.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="data" href="./json-to-csv.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-file-csv" aria-hidden="true"></i>
+        <h3>JSON to CSV</h3>
+        <p>Convert JSON records into CSV data.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="data" href="./json-to-excel.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-file-excel" aria-hidden="true"></i>
+        <h3>JSON to Excel</h3>
+        <p>Export JSON records to an Excel workbook.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="data" href="./excel-to-json.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-table" aria-hidden="true"></i>
+        <h3>Excel to JSON</h3>
+        <p>Convert Excel workbook data into JSON.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="data" href="./json-to-table.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-table" aria-hidden="true"></i>
+        <h3>JSON to Table</h3>
+        <p>View JSON records as a structured table.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="data" href="./json-to-xml.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-code" aria-hidden="true"></i>
+        <h3>JSON to XML</h3>
+        <p>Convert JSON data into XML.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="data" href="./xml-to-json.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-code-branch" aria-hidden="true"></i>
+        <h3>XML to JSON</h3>
+        <p>Convert XML data into JSON.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="documents" href="./word-to-pdf.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-file-pdf" aria-hidden="true"></i>
+        <h3>Word to PDF</h3>
+        <p>Convert a Word document into a PDF.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="images" href="./jpg-to-png.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-image" aria-hidden="true"></i>
+        <h3>JPG to PNG</h3>
+        <p>Convert JPG images to PNG format.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="images" href="./image-compressor.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-compress" aria-hidden="true"></i>
+        <h3>Image Compressor</h3>
+        <p>Reduce image file size with adjustable compression.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="qr" href="./qr-generator.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-qrcode" aria-hidden="true"></i>
+        <h3>QR Code Generator</h3>
+        <p>Generate a QR code from text or a URL.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="qr" href="./qr-scanner.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-camera" aria-hidden="true"></i>
+        <h3>QR Code Scanner</h3>
+        <p>Scan QR codes using your camera.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="qr" href="./payment-qr-generator.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-money-bill-transfer" aria-hidden="true"></i>
+        <h3>Payment QR Generator</h3>
+        <p>Create a QR code for payment details.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="calculators" href="./age-calculator.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-cake-candles" aria-hidden="true"></i>
+        <h3>Age Calculator</h3>
+        <p>Calculate age from a date of birth.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="calculators" href="./emi-calculator.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-calculator" aria-hidden="true"></i>
+        <h3>EMI Calculator</h3>
+        <p>Estimate monthly loan instalments.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="calculators" href="./sip-calculator.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+        <h3>SIP Calculator</h3>
+        <p>Estimate returns on monthly investments.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="utilities" href="./aes-256-cbc.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+        <h3>AES-256-CBC Encrypt / Decrypt</h3>
+        <p>Encrypt or decrypt text using AES-256-CBC.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="utilities" href="./base64-encode-decode.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+        <h3>Base64 Encoder / Decoder</h3>
+        <p>Encode text to Base64 or decode a Base64 string.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="utilities" href="./case-converter.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-text-height" aria-hidden="true"></i>
+        <h3>Case Converter</h3>
+        <p>Convert text to different letter-case styles.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="utilities" href="./text-to-one-line.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-lines-leaning" aria-hidden="true"></i>
+        <h3>Text to One Line</h3>
+        <p>Remove line breaks and join text into one line.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="utilities" href="./url-encoder-decoder.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-link" aria-hidden="true"></i>
+        <h3>URL Encoder / Decoder</h3>
+        <p>Encode or decode URL components.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <a class="card group rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1" data-category="utilities" href="./uuid-generator.html" style="text-decoration:none;color:inherit;display:block">
+        <i class="fa-solid fa-fingerprint" aria-hidden="true"></i>
+        <h3>UUID Generator</h3>
+        <p>Generate a unique UUID in your browser.</p>
+        <span class="tool-card-link-label">Open tool <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+    </div>
+    <p class="tool-directory-link"><a href="./converters.html">Browse all 225 converters by category <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+    <p class="tool-empty-state" id="toolEmptyState" hidden>No tools match that search. Try another name or category.</p>
+  </section>
+
+  <section class="how-it-works">
+    <div class="how-it-works-heading">
+      <span class="section-kicker">Simple by design</span>
+      <h2>Get it done in three easy steps</h2>
+      <p>Skip the setup and get straight to the task. ConvoTools keeps everyday utilities easy to find and simple to use.</p>
+    </div>
+    <div class="steps-grid grid grid-cols-1 gap-5 md:grid-cols-3">
+      <article class="step-card">
+        <span class="step-number">01</span>
+        <h3>Choose a tool</h3>
+        <p>Pick the converter, calculator, or utility that matches what you need to do.</p>
+      </article>
+      <article class="step-card">
+        <span class="step-number">02</span>
+        <h3>Add your input</h3>
+        <p>Enter text, provide a value, or select a file when the tool asks for one.</p>
+      </article>
+      <article class="step-card">
+        <span class="step-number">03</span>
+        <h3>Use your result</h3>
+        <p>View the result and use the available copy, download, or calculation actions.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="features mx-auto w-full max-w-7xl px-6 py-16" id="features">
+    <h2 style="text-align:center;margin-bottom:40px">A more convenient way to handle small tasks</h2>
+    <div class="feature-grid grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="feature rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><i class="fa-solid fa-bolt"></i>
+        <h3>Quick to use</h3>
+        <p>Open a tool and get started without a lengthy setup.</p>
+      </div>
+      <div class="feature rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><i class="fa-solid fa-mobile-screen"></i>
         <h3>Mobile Friendly</h3>
-        <p>Works perfectly on phones and tablets.</p>
+        <p>Use the site on a phone, tablet, or desktop.</p>
       </div>
-      <div class="feature"><i class="fa-solid fa-toolbox"></i>
-        <h3>50+ Tools</h3>
-        <p>Many conversion utilities in one place.</p>
+      <div class="feature rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><i class="fa-solid fa-toolbox"></i>
+        <h3>Growing toolkit</h3>
+        <p>Find conversion, QR, text, and calculator tools together.</p>
       </div>
-      <div class="feature"><i class="fa-solid fa-lock"></i>
-        <h3>Secure & Free</h3>
-        <p>No signup required. Completely free.</p>
+      <div class="feature rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><i class="fa-solid fa-lock"></i>
+        <h3>Free to access</h3>
+        <p>Use the available tools without creating an account.</p>
       </div>
     </div>
   </section>
   <button id="scrollTopBtn" title="Go to top">↑</button>
-  <footer>
+  <footer class="site-footer">
     <p>© 2026 ConvoTools. All rights reserved.</p>
+
+    <p>Need additional tools or updates? Email us at <a href="mailto:support@codelaunchtechnologies.com">support@codelaunchtechnologies.com</a>.</p>
+    <a class="site-footer-brand" href="https://www.codelaunchtechnologies.com/" target="_blank" rel="noopener noreferrer">
+      <img src="img/codelaunch-logo.png" alt="CodeLaunch Technologies logo">
+      <span>Powered by CodeLaunch</span>
+    </a>
   </footer>
 
   <script>
@@ -508,6 +624,7 @@
       });
     };
   </script>
+  <script src="js/tool-search.js"></script>
 </body>
 
 </html>

@@ -3,7 +3,18 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>ConvoTools - UUID Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UUID Generator - Create UUIDs Online | ConvoTools</title>
+    <meta name="description" content="Generate a random UUID online with this free UUID generator. Create a unique identifier instantly with ConvoTools.">
+    <link rel="canonical" href="https://convotools.in/uuid-generator.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ConvoTools">
+    <meta property="og:title" content="UUID Generator - Create UUIDs Online | ConvoTools">
+    <meta property="og:description" content="Generate a random UUID instantly with the free online ConvoTools UUID generator.">
+    <meta property="og:url" content="https://convotools.in/uuid-generator.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="UUID Generator - Create UUIDs Online | ConvoTools">
+    <meta name="twitter:description" content="Generate a random UUID instantly with the free online ConvoTools UUID generator.">
 
     <link rel="icon" type="image/x-icon" href="img/ConvoTools-head.png">
 
@@ -59,18 +70,21 @@
 
     gtag('config', 'AW-11442578018');
   </script>
+<link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/rich-design.css">
 </head>
 
-<body>
+<body class="min-h-screen text-slate-800 antialiased">
 
-    <header>
+    <header class="flex items-center justify-between gap-4">
 
     <a class="logo" href="./index.html">
       <img src="img/convotools.gif" alt="ConvoTools" style="width: 150px;">
     </a>
 
-    <nav>
+    <nav class="flex items-center gap-2">
       <a href="./index.html">Home</a>
+      <a href="./converters.html">Converters</a>
       <!-- <a href="https://www.buymeacoffee.com/convotools" target="_blank">
         Buy me a coffee
       </a> -->
@@ -78,11 +92,11 @@
 
   </header>
 
-    <section class="converter">
+    <section class="converter mx-auto w-full max-w-6xl px-5 py-16">
 
         <h2>UUID Generator</h2>
 
-        <div class="convert-box">
+        <div class="convert-box mx-auto w-full rounded-3xl border border-slate-200 bg-white p-8 shadow-xl">
 
             <button onclick="generateUUID()">
                 <i class="fa-solid fa-fingerprint"></i> Generate UUID
@@ -99,6 +113,13 @@
         }
     </script>
 
+<footer class="site-footer"><p>&copy; 2026 ConvoTools. All rights reserved.</p>
+    <p>Need additional tools or updates? Email us at <a href="mailto:support@codelaunchtechnologies.com">support@codelaunchtechnologies.com</a>.</p>
+    <a class="site-footer-brand" href="https://www.codelaunchtechnologies.com/" target="_blank" rel="noopener noreferrer">
+      <img src="img/codelaunch-logo.png" alt="CodeLaunch Technologies logo">
+      <span>Powered by CodeLaunch</span>
+    </a>
+</footer>
 </body>
 
 </html>

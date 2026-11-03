@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Converter | ConvoTools</title>
+  <meta name="description" content="Convert supported files locally in your browser with ConvoTools.">
+  <meta name="robots" content="noindex,follow">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/tailwind.css">
+  <link rel="stylesheet" href="css/rich-design.css">
+</head>
+<body class="converter-workspace-page min-h-screen text-slate-800 antialiased">
+  <header class="flex items-center justify-between gap-4">
+    <a class="logo" href="./index.html"><img src="img/convotools.gif" alt="ConvoTools" style="width: 150px;"></a>
+    <nav class="flex items-center gap-2" aria-label="Main navigation">
+      <a href="./index.html">Home</a>
+      <a href="./converters.html">All converters</a>
+    </nav>
+  </header>
+
+  <main class="converter-workspace">
+    <a class="workspace-back-link" href="./converters.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Converter directory</a>
+    <section class="workspace-card">
+      <p class="eyebrow">ConvoTools browser workspace</p>
+      <h1 id="converterTitle">Converter</h1>
+      <p id="converterSummary" class="workspace-summary"></p>
+      <div id="converterCapability" class="converter-capability" role="status"></div>
+      <form id="converterForm">
+        <label class="workspace-label" for="converterFile">Choose a file (optional)</label>
+        <input id="converterFile" class="workspace-file" type="file">
+        <label class="workspace-label" for="converterInput">Or paste your input</label>
+        <textarea id="converterInput" class="workspace-textarea" rows="12" spellcheck="false" placeholder="Paste text to convert..."></textarea>
+        <button id="convertButton" class="workspace-convert-button" type="submit">Convert in browser</button>
+      </form>
+      <div id="converterMessage" class="workspace-message" role="status" aria-live="polite"></div>
+      <section id="converterOutputSection" class="workspace-output" hidden>
+        <div class="workspace-output-heading">
+          <label class="workspace-label" for="converterOutput">Converted output</label>
+          <a id="downloadOutput" class="workspace-download" download>Download file</a>
+        </div>
+        <textarea id="converterOutput" class="workspace-textarea" rows="12" readonly></textarea>
+      </section>
+      <p class="workspace-privacy">Files and text for supported conversions are processed in this browser and are not uploaded.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 ConvoTools. All rights reserved.</p>
+    <p>Need additional tools or updates? Email us at <a href="mailto:support@codelaunchtechnologies.com">support@codelaunchtechnologies.com</a>.</p>
+    <a class="site-footer-brand" href="https://www.codelaunchtechnologies.com/" target="_blank" rel="noopener noreferrer">
+      <img src="img/codelaunch-logo.png" alt="CodeLaunch Technologies logo">
+      <span>Powered by CodeLaunch</span>
+    </a>
+  </footer>
+  <script src="js/converter-catalog.js"></script>
+  <script src="js/converter-engine.js"></script>
+</body>
+</html>

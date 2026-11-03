@@ -1,0 +1,11 @@
+.next/
+public/ffmpeg/
+public/pdf.worker.min.mjs
+node_modules/
+out/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+.env*
+!.env.example

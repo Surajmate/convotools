@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand-950: #071526;
+  --color-brand-900: #10243b;
+  --color-brand-800: #183a5b;
+  --color-brand-700: #205886;
+  --color-brand-600: #287ab1;
+  --color-brand-500: #35a6df;
+  --color-brand-400: #67c9f0;
+  --color-brand-300: #99dcf5;
+  --color-brand-200: #c5ebfb;
+  --color-brand-100: #e7f6fc;
+  --color-accent-500: #f7bd33;
+  --color-accent-400: #ffd35f;
+  --color-accent-300: #ffe294;
+}
+
+:root {
+  color-scheme: light;
+  --page: #f5f8fc;
+  --surface: #ffffff;
+  --surface-muted: #f0f5fa;
+  --ink: #13253a;
+  --muted: #62748b;
+  --line: #e1e9f1;
+  --brand: #1c6397;
+  --brand-strong: #12466f;
+  --accent: #f7bd33;
+  --shadow: 0 24px 70px rgba(13, 41, 69, .1);
+}
+
+html.dark {
+  color-scheme: dark;
+  --page: #091422;
+  --surface: #101f30;
+  --surface-muted: #15283b;
+  --ink: #edf5fb;
+  --muted: #a4b4c5;
+  --line: #253a4e;
+  --brand: #72c9f1;
+  --brand-strong: #9cdef8;
+  --accent: #ffd35f;
+  --shadow: 0 24px 70px rgba(0, 0, 0, .28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 86% 4%, color-mix(in srgb, var(--brand) 9%, transparent), transparent 34rem),
+    var(--page);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.65;
+  transition: background-color .2s ease, color .2s ease;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--brand) 42%, transparent);
+  outline-offset: 3px;
+}
+
+.site-grid {
+  background-image: linear-gradient(to right, color-mix(in srgb, var(--line) 32%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--line) 32%, transparent) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 92%);
+}
+
+.enter {
+  animation: rise-in .55s both;
+}
+
+.enter-delay-1 {
+  animation-delay: .08s;
+}
+
+.enter-delay-2 {
+  animation-delay: .16s;
+}
+
+.converter-card {
+  animation: rise-in .4s both;
+  animation-delay: calc(var(--card-index, 0) * 22ms);
+}
+
+.drop-target {
+  transition: border-color .2s ease, background .2s ease, transform .2s ease;
+}
+
+.drop-target:focus-within,
+.drop-target:hover {
+  transform: translateY(-1px);
+  border-color: var(--brand);
+  background: color-mix(in srgb, var(--brand) 6%, var(--surface));
+}
+
+.theme-toggle {
+  transition: transform .2s ease, background-color .2s ease;
+}
+
+.theme-toggle:hover {
+  transform: rotate(-8deg) scale(1.05);
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

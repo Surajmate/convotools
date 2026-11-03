@@ -10,9 +10,15 @@
     <link rel="icon" type="image/x-icon" href="img/ConvoTools-head.png">
     <meta name="description"
         content="Scan QR codes instantly using your camera. Free QR Scanner tool by ConvoTools. Fast, secure and easy to use.">
-
-    <!-- SEO -->
-    <meta name="keywords" content="QR Scanner, Scan QR Code Online, QR Reader, Camera QR Scanner, ConvoTools">
+    <link rel="canonical" href="https://convotools.in/qr-scanner.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ConvoTools">
+    <meta property="og:title" content="QR Code Scanner - Free Online Tool | ConvoTools">
+    <meta property="og:description" content="Scan QR codes using your camera with the free online ConvoTools QR scanner.">
+    <meta property="og:url" content="https://convotools.in/qr-scanner.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="QR Code Scanner - Free Online Tool | ConvoTools">
+    <meta name="twitter:description" content="Scan QR codes using your camera with the free online ConvoTools QR scanner.">
 
     <style>
         body {
@@ -80,18 +86,21 @@
 
     gtag('config', 'AW-11442578018');
   </script>
+<link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/rich-design.css">
 </head>
 
-<body>
+<body class="min-h-screen text-slate-800 antialiased">
 
-    <header>
+    <header class="flex items-center justify-between gap-4">
 
         <a class="logo" href="./index.html">
             <img src="img/convotools.gif" alt="ConvoTools" style="width: 150px;">
         </a>
 
-        <nav>
+        <nav class="flex items-center gap-2">
             <a href="./index.html">Home</a>
+            <a href="./converters.html">Converters</a>
             <!-- <a href="https://www.buymeacoffee.com/convotools" target="_blank">
         Buy me a coffee
       </a> -->
@@ -99,7 +108,7 @@
 
     </header>
 
-    <div class="container">
+    <div class="container mx-auto w-full rounded-3xl border border-slate-200 bg-white p-8 shadow-xl">
         <video id="preview"></video>
 
         <div class="result" id="result">
@@ -110,7 +119,13 @@
         <button onclick="openLink()">Open Link</button>
     </div>
 
-    <footer>© 2026 ConvoTools.in</footer>
+    <footer class="site-footer">© 2026 ConvoTools.in
+    <p>Need additional tools or updates? Email us at <a href="mailto:support@codelaunchtechnologies.com">support@codelaunchtechnologies.com</a>.</p>
+    <a class="site-footer-brand" href="https://www.codelaunchtechnologies.com/" target="_blank" rel="noopener noreferrer">
+      <img src="img/codelaunch-logo.png" alt="CodeLaunch Technologies logo">
+      <span>Powered by CodeLaunch</span>
+    </a>
+    </footer>
 
     <!-- QR Scanner Library -->
     <script src="https://unpkg.com/html5-qrcode"></script>
